@@ -1,9 +1,10 @@
 import "./App.css";
+import Windows11 from "./components/windows11";
 
 function App() {
   return (
     <>
-      <p>hello world</p>
+      <Windows11 />
     </>
   );
 }
