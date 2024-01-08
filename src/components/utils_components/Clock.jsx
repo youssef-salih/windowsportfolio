@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-const Clock = ({ onlyTime, onlyDay }) => {
+const Clock = ({ onlyTime, onlyDay, mini }) => {
   const monthList = [
     "January",
     "February",
@@ -44,23 +44,45 @@ const Clock = ({ onlyTime, onlyDay }) => {
   let day = dayList[currentTime.getDay()];
   let hour = currentTime.getHours();
   let minute = currentTime.getMinutes();
-  let month = monthList[currentTime.getMonth()];
+  let month = mini
+    ? (currentTime.getMonth() + 1).toLocaleString("en-US", {
+        minimumIntegerDigits: 2,
+        useGrouping: false,
+      })
+    : monthList[currentTime.getMonth()];
+
   let date = currentTime.getDate().toLocaleString();
+  let year = currentTime.getFullYear();
 
   if (minute.toLocaleString().length === 1) {
     minute = "0" + minute;
   }
 
   let displayTime;
+  let displayDate;
   if (onlyTime) {
     displayTime = hour + ":" + minute + " ";
   } else if (onlyDay) {
     displayTime = day + ", " + month + " " + date;
+  } else if (mini) {
+    displayTime = hour + ":" + minute;
+    displayDate = date + "/" + month + "/" + year;
   } else {
     displayTime = day + " " + month + " " + date + " " + hour + ":" + minute;
   }
 
-  return <span>{displayTime}</span>;
+  return (
+    <>
+      {mini ? (
+        <div className="flex flex-col items-center">
+          <span>{displayTime}</span>
+          <span>{displayDate}</span>
+        </div>
+      ) : (
+        <span>{displayTime}</span>
+      )}
+    </>
+  );
 };
 
 export default Clock;

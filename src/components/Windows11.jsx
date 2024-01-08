@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import Lock_screen from "./screen/Lock_screen";
 import BootingScreen from "./screen/Booting_screen";
+import Navbar from "./screen/Navbar";
+import Desktop from "./screen/Desktop";
 
 const Windows11 = () => {
   const [screenLocked, setScreenLocked] = useState(true);
@@ -85,6 +87,8 @@ const Windows11 = () => {
         turnOn={turnOn}
         visible={bootingScreen}
       />
+      <Navbar lockScreen={""} shutDown={""} />
+      <Desktop bgImageName={bgImageName} />
     </div>
   );
 };
