@@ -8,8 +8,9 @@ import folder from "./Folder.png";
 import settings from "./Settings.png";
 import trashEmpty from "./TrashEmpty.png";
 import trashFull from "./TrashFull.png";
+import magnify from "./Magnify.svg";
 
-export { 
+export {
   windowsBoot,
   power,
   processLoad,
@@ -20,4 +21,5 @@ export {
   settings,
   trashEmpty,
   trashFull,
+  magnify,
 };

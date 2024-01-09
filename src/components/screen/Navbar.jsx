@@ -3,9 +3,12 @@ import Clock from "../utils_components/Clock";
 import { windowsBoot } from "../../assets/images/icons";
 import NavbarApp from "../base/NavbarApp";
 import apps from "../../../apps.config";
+import WindowsShowApps from "../utils_components/WindowsShowApps";
+
+// windows searchbar
 
 const Navbar = ({ shutDown, lockScreen }) => {
-  const [statusCard, setStatusCard] = useState(false);
+  const [statusCard, setStatusCard] = useState(true);
 
   let renderApps = () => {
     let sideBarAppsJsx = [];
@@ -37,25 +40,11 @@ const Navbar = ({ shutDown, lockScreen }) => {
       <div
         id="status-bar"
         tabIndex="0"
-        onFocus={() => {
-          setStatusCard(true);
-        }}
         // removed onBlur from here
         className={
-          "relative pr-3 pl-3 outline-none transition duration-100 ease-in-out border-b-2 border-transparent focus:border-gray-400 py-1 "
+          "relative pr-3 pl-3 outline-none transition duration-100 ease-in-out border-b-2 border-transparent  py-1 "
         }
-      >
-        {/* <Status />
-        <StatusCard
-          shutDown={shutDown}
-          lockScreen={lockScreen}
-          visible={statusCard}
-          toggleVisible={() => {
-            // this prop is used in statusCard component in handleClickOutside callback using react-onclickoutside
-            setStatusCard(false);
-          }}
-        /> */}
-      </div>
+      />
       <div className="flex ">
         <div
           tabIndex="0"
@@ -63,7 +52,14 @@ const Navbar = ({ shutDown, lockScreen }) => {
             "mr-4 outline-none transition duration-100 ease-in-out border-b-2 border-transparent flex items-center focus:border-gray-400  "
           }
         >
-          <img src={windowsBoot} alt={""} className="w-8 h-8" />
+          <img
+            src={windowsBoot}
+            alt={""}
+            width="28px"
+            height="28px"
+            className="w-7"
+          />
+          {statusCard ? <WindowsShowApps /> : null}
         </div>
         {renderApps()}
       </div>

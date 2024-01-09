@@ -30,12 +30,12 @@ const NavbarApp = ({
     <div
       tabIndex="0"
       // onClick={openApp()}
-      onMouseEnter={() => {
-        setShowTitle(true);
-      }}
-      onMouseLeave={() => {
-        setShowTitle(false);
-      }}
+      // onMouseEnter={() => {
+      //   setShowTitle(true);
+      // }}
+      // onMouseLeave={() => {
+      //   setShowTitle(false);
+      // }}
       className={
         (isClose[id] === false && isFocus[id]
           ? "bg-white bg-opacity-10 "
