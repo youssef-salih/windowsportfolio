@@ -43,12 +43,15 @@ const Window = ({ minimized, isFocused }) => {
 
   return (
     <Rnd
+      bounds={"parent"}
       default={{
         x: 0,
         y: 0,
         width: "60%",
         height: "80%",
       }}
+      minWidth="20%"
+      minHeight="30%"
     >
       <div
         // style={{ width: `${width}%`, height: `${height}%` }}
