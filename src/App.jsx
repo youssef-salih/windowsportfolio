@@ -1,5 +1,5 @@
 import "./App.css";
-import Windows11 from "./components/Windows11";
+import Windows11 from "./components/Windows_11";
 
 function App() {
   return (

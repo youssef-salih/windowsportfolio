@@ -8,7 +8,7 @@ import WindowsShowApps from "../utils_components/WindowsShowApps";
 // windows searchbar
 
 const Navbar = ({ shutDown, lockScreen }) => {
-  const [statusCard, setStatusCard] = useState(true);
+  const [statusCard, setStatusCard] = useState(false);
 
   let renderApps = () => {
     let sideBarAppsJsx = [];
@@ -40,27 +40,27 @@ const Navbar = ({ shutDown, lockScreen }) => {
       <div
         id="status-bar"
         tabIndex="0"
-        // removed onBlur from here
         className={
-          "relative pr-3 pl-3 outline-none transition duration-100 ease-in-out border-b-2 border-transparent  py-1 "
+          "hidden md:flex relative pr-3 pl-3 outline-none transition duration-100 ease-in-out border-b-2 border-transparent  py-1 "
         }
       />
-      <div className="flex ">
+      <div className="flex  ">
         <div
           tabIndex="0"
           className={
             "mr-4 outline-none transition duration-100 ease-in-out border-b-2 border-transparent flex items-center focus:border-gray-400  "
           }
+          onClick={() => setStatusCard((prev) => !prev)}
         >
           <img
             src={windowsBoot}
             alt={""}
             width="28px"
             height="28px"
-            className="w-7"
+            className="w-7 ml-2"
           />
-          {statusCard ? <WindowsShowApps /> : null}
         </div>
+        {statusCard ? <WindowsShowApps isShown={setStatusCard} /> : null}
         {renderApps()}
       </div>
 

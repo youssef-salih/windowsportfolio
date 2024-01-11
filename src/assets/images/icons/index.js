@@ -9,6 +9,9 @@ import settings from "./Settings.png";
 import trashEmpty from "./TrashEmpty.png";
 import trashFull from "./TrashFull.png";
 import magnify from "./Magnify.svg";
+import maximize from "./maximize.svg";
+import minimize from "./minimize.svg";
+import close from "./close.svg";
 
 export {
   windowsBoot,
@@ -22,4 +25,7 @@ export {
   trashEmpty,
   trashFull,
   magnify,
+  minimize,
+  maximize,
+  close,
 };

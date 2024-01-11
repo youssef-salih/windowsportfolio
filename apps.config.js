@@ -38,8 +38,8 @@ const apps = [
     // screen: displayTerminalCalc,
   },
   {
-    id: "about-vivek",
-    title: "About Vivek",
+    id: "about-youssef",
+    title: "About Youssef",
     icon: folderUser,
     disabled: false,
     favourite: true,

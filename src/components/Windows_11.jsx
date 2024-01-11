@@ -1,42 +1,55 @@
 import { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  screenOn,
+  screenOff,
+  screenLockedValue,
+  shutDownScreenValue,
+  shutOnScreen,
+  shutOffScreen,
+} from "../features/power/stateSlice";
 import Lock_screen from "./screen/Lock_screen";
 import BootingScreen from "./screen/Booting_screen";
 import Navbar from "./screen/Navbar";
 import Desktop from "./screen/Desktop";
 
 const Windows11 = () => {
-  const [screenLocked, setScreenLocked] = useState(true);
-  const [shutDownScreen, setShutDownScreen] = useState(false);
+  const dispatch = useDispatch();
+  // states from store
+  // lock screen
+  const screenLocked = useSelector(screenLockedValue);
+  const shutDownScreen = useSelector(shutDownScreenValue);
+
   const [bootingScreen, setBootingScreen] = useState(true);
   const [bgImageName, setBgImageName] = useState("wall-1");
   const setTimeOutBootScreen = () => {
     setTimeout(() => {
       setBootingScreen(false);
-    }, 2000);
+    }, 8000);
   };
-  // const lockScreen = () => {
-  //   document.getElementById("status-bar").blur();
-  //   setTimeout(() => {
-  //     setScreenLocked(true);
-  //   }, 100);
-  //   localStorage.setItem("screen-locked", true);
-  // };
+  const lockScreen = () => {
+    document.getElementById("status-bar").blur();
+    setTimeout(() => {
+      dispatch(screenOff());
+    }, 100);
+    localStorage.setItem("screen-locked", true);
+  };
 
   const unLockScreen = () => {
-    window.removeEventListener("click", unLockScreen);
     window.removeEventListener("keypress", unLockScreen);
-    setScreenLocked(false);
+    dispatch(screenOn());
     localStorage.setItem("screen-locked", false);
   };
   const turnOn = () => {
-    setShutDownScreen(false);
+    // setShutDownScreen(false);
+    dispatch(shutOnScreen());
     setBootingScreen(false);
     setTimeOutBootScreen();
     localStorage.setItem("shut-down", false);
   };
   const shutDownAction = () => {
     document.getElementById("status-bar").blur();
-    setShutDownScreen(true);
+    dispatch(shutOffScreen());
     localStorage.setItem("shut-down", true);
   };
 
@@ -53,25 +66,27 @@ const Windows11 = () => {
       setBootingScreen(false);
     } else {
       // user is visiting site for the first time
-      localStorage.setItem("booting_screen", false);
+      localStorage.setItem("booting_screen", true);
       setTimeOutBootScreen();
     }
 
     // get shutdown state
     let shutDown = localStorage.getItem("shut-down");
-    if (shutDown !== null && shutDown !== undefined && shutDown === "true")
+    if (shutDown !== null && shutDown !== undefined && shutDown === "true") {
       shutDownAction();
-    else {
+    } else {
       // Get previous lock screen state
       let screenLocked = localStorage.getItem("screen-locked");
       if (screenLocked !== null && screenLocked !== undefined) {
-        setScreenLocked(() => ("true" ? true : false));
+        // setScreenLocked(() => ("true" ? true : false));
+        screenLocked === "true" ? true : false;
       }
     }
   };
 
   useEffect(() => {
     getLocalData();
+    localStorage.setItem("bg-image", "wall-1");
     return () => {};
   }, []);
 
@@ -87,7 +102,7 @@ const Windows11 = () => {
         turnOn={turnOn}
         visible={bootingScreen}
       />
-      <Navbar lockScreen={""} shutDown={""} />
+      <Navbar lockScreen={lockScreen} shutDown={turnOn} />
       <Desktop bgImageName={bgImageName} />
     </div>
   );
