@@ -12,6 +12,8 @@ import Lock_screen from "./screen/Lock_screen";
 import BootingScreen from "./screen/Booting_screen";
 import Navbar from "./screen/Navbar";
 import Desktop from "./screen/Desktop";
+import apps from "../../apps.config";
+import Window from "./base/Window";
 
 const Windows11 = () => {
   const dispatch = useDispatch();

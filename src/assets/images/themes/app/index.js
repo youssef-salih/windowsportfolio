@@ -6,6 +6,18 @@ import settings from "./settings.png";
 import spotify from "./spotify.png";
 import todolist from "./todoist.png";
 import vscode from "./vscode.png";
+import chrome_home from "./chrome/chrome_home.svg";
+import chrome_refresh from "./chrome/chrome_refresh.svg";
 
-
-export { calc, chrome, cmd, gedit, settings, spotify, todolist, vscode };
+export {
+  calc,
+  chrome,
+  cmd,
+  gedit,
+  settings,
+  spotify,
+  todolist,
+  vscode,
+  chrome_home,
+  chrome_refresh,
+};

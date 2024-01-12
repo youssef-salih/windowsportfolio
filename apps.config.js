@@ -17,6 +17,9 @@ import {
   spotify,
   vscode,
 } from "./src/assets/images/themes/app";
+import { displayAboutYoussef } from "./src/components/apps/AboutYoussef";
+import { displayChrome } from "./src/components/apps/Chrome";
+import Spotify, { displaySpotify } from "./src/components/apps/Spotify";
 
 const apps = [
   {
@@ -26,8 +29,18 @@ const apps = [
     disabled: false,
     favourite: true,
     desktop_shortcut: true,
-    // screen: displayChrome,
+    screen: displayChrome,
   },
+  {
+    id: "spotify",
+    title: "Spotify",
+    icon: spotify,
+    disabled: false,
+    favourite: true,
+    desktop_shortcut: false,
+    screen: displaySpotify,
+  },
+
   {
     id: "calc",
     title: "Calc",
@@ -44,7 +57,7 @@ const apps = [
     disabled: false,
     favourite: true,
     desktop_shortcut: true,
-    // screen: displayAboutVivek,
+    screen: displayAboutYoussef,
   },
   {
     id: "vscode",
@@ -64,15 +77,7 @@ const apps = [
     desktop_shortcut: false,
     // screen: displayTerminal,
   },
-  {
-    id: "spotify",
-    title: "Spotify",
-    icon: spotify,
-    disabled: false,
-    favourite: true,
-    desktop_shortcut: false,
-    // screen: displaySpotify, // India Top 50 Playlist 😅
-  },
+
   {
     id: "settings",
     title: "Settings",
