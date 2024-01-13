@@ -12,6 +12,9 @@ import magnify from "./Magnify.svg";
 import maximize from "./maximize.svg";
 import minimize from "./minimize.svg";
 import close from "./close.svg";
+import github from "./github.svg";
+import linkedin from "./linkedin.svg";
+import winInfo from "./winInfo.svg";
 
 export {
   windowsBoot,
@@ -28,4 +31,7 @@ export {
   minimize,
   maximize,
   close,
+  github,
+  linkedin,
+  winInfo,
 };

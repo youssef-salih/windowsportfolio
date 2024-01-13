@@ -8,7 +8,7 @@ const WindowTitle = ({ title, icon }) => {
   return (
     <div
       className={
-        "  relative bg-white border-t-2 border-white border-opacity-5  px-3 text-black w-full select-none flex justify-between items-center"
+        "title  relative bg-white border-t-2 border-white border-opacity-5  px-3 text-black w-full select-none flex justify-between items-center"
       }
     >
       <div className="  flex items-center justify-between gap-x-2">
@@ -53,34 +53,37 @@ const Window = ({ minimized, isFocused, screen, title, icon }) => {
   });
 
   return (
-    <Rnd
-      bounds={"parent"}
-      default={{
-        x: 0,
-        y: 0,
-        width: "60%",
-        height: "80%",
-      }}
-      minWidth="20%"
-      minHeight="30%"
-    >
-      <div
-        // style={{ width: `${width}%`, height: `${height}%` }}
-        className={
-          cursorType +
-          " " +
-          (closed ? "closed-window" : "") +
-          " " +
-          (maximized ? "duration-300 rounded-none" : "  rounded-b-none") +
-          (minimized ? " opacity-0 invisible duration-200 " : "") +
-          (isFocused ? " z-30 " : " z-20 notFocused") +
-          " opened-window overflow-hidden min-w-1/4 min-h-1/4 main-window absolute window-shadow border-whhite border-opacity-40 border border-t-0 flex flex-col w-full h-full"
-        }
+    <>
+      <Rnd
+        bounds={"parent"}
+        default={{
+          x: 0,
+          y: 0,
+          width: "60%",
+          height: "80%",
+        }}
+        minWidth="20%"
+        minHeight="30%"
+        dragHandleClassName="title"
       >
-        <WindowTitle title={title} icon={icon} />
-        {screen()}
-      </div>
-    </Rnd>
+        <div
+          // style={{ width: `${width}%`, height: `${height}%` }}
+          className={
+            cursorType +
+            " " +
+            (closed ? "closed-window" : "") +
+            " " +
+            (maximized ? "duration-300 rounded-none" : "  rounded-b-none") +
+            (minimized ? " opacity-0 invisible duration-200 " : "") +
+            (isFocused ? " z-30 " : " z-20 notFocused") +
+            " opened-window  min-w-1/4 min-h-1/4 main-window absolute window-shadow border-whhite border-opacity-40 border border-t-0 flex flex-col w-full h-full"
+          }
+        >
+          <WindowTitle title={title} icon={icon} />
+          <div className="overflow-hidden h-full"> {screen()}</div>
+        </div>
+      </Rnd>
+    </>
   );
 };
 

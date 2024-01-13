@@ -8,7 +8,7 @@
 // import { displayAboutVivek } from './components/apps/vivek';
 // import { displayTerminalCalc } from './components/apps/calc';
 
-import { folderUser, settings, trashEmpty } from "./src/assets/images/icons";
+import { explorer, folder, folderUser, settings, trashEmpty } from "./src/assets/images/icons";
 import {
   calc,
   chrome,
@@ -40,7 +40,15 @@ const apps = [
     desktop_shortcut: false,
     screen: displaySpotify,
   },
-
+  {
+    id: "about-youssef",
+    title: "About Youssef",
+    icon: explorer,
+    disabled: false,
+    favourite: true,
+    desktop_shortcut: true,
+    screen: displayAboutYoussef,
+  },
   {
     id: "calc",
     title: "Calc",
@@ -50,15 +58,7 @@ const apps = [
     desktop_shortcut: false,
     // screen: displayTerminalCalc,
   },
-  {
-    id: "about-youssef",
-    title: "About Youssef",
-    icon: folderUser,
-    disabled: false,
-    favourite: true,
-    desktop_shortcut: true,
-    screen: displayAboutYoussef,
-  },
+
   {
     id: "vscode",
     title: "Visual Studio Code",
