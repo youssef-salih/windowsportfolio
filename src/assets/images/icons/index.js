@@ -13,7 +13,7 @@ import maximize from "./maximize.svg";
 import minimize from "./minimize.svg";
 import close from "./close.svg";
 import github from "./github.svg";
-import linkedin from "./linkedin.svg";
+import linkedin from "./linkedIn.svg";
 import winInfo from "./winInfo.svg";
 
 export {
