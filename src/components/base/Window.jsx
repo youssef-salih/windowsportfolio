@@ -15,7 +15,7 @@ const WindowTitle = ({ title, icon }) => {
         <img src={icon} alt={title} className="size-4" />
         <p className="font-semibold text-sm">{title}</p>
       </div>
-      <div className="flex gap-x-2    items-center  ">
+      <div className="flex gap-x-2 items-center  ">
         <WindowEdit />
       </div>
     </div>
@@ -25,13 +25,13 @@ const WindowEdit = () => {
   return (
     <>
       <div className="hover:bg-ub-gray p-4">
-        <img src={minimize} alt="minimize" className="w-4  " />
+        <img src={minimize} alt="minimize" className="w-4" />
       </div>
       <div className="hover:bg-ub-gray p-4">
-        <img src={maximize} alt="maximize" className="w-4  " />
+        <img src={maximize} alt="maximize" className="w-4" />
       </div>
       <div className="hover:bg-red-500 p-4 [&>img]:hover:invert">
-        <img src={close} alt="close" className="w-4  " />
+        <img src={close} alt="close" className="w-4" />
       </div>
     </>
   );
@@ -62,7 +62,7 @@ const Window = ({ minimized, isFocused, screen, title, icon }) => {
           width: "60%",
           height: "80%",
         }}
-        minWidth="20%"
+        minWidth="50%"
         minHeight="30%"
         dragHandleClassName="title"
       >

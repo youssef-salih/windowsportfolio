@@ -8,7 +8,13 @@
 // import { displayAboutVivek } from './components/apps/vivek';
 // import { displayTerminalCalc } from './components/apps/calc';
 
-import { explorer, folder, folderUser, settings, trashEmpty } from "./src/assets/images/icons";
+import {
+  explorer,
+  folder,
+  folderUser,
+  settings,
+  trashEmpty,
+} from "./src/assets/images/icons";
 import {
   calc,
   chrome,
@@ -29,7 +35,7 @@ const apps = [
     disabled: false,
     favourite: true,
     desktop_shortcut: true,
-    screen: displayChrome,
+    // screen: displayChrome,
   },
   {
     id: "spotify",
@@ -38,7 +44,7 @@ const apps = [
     disabled: false,
     favourite: true,
     desktop_shortcut: false,
-    screen: displaySpotify,
+    // screen: displaySpotify,
   },
   {
     id: "about-youssef",
