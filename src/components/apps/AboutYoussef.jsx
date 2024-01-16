@@ -39,7 +39,8 @@ const AboutYoussef = () => {
     </div>
   );
 };
-const RenderLinks = ({ changeScreen }) => {
+const RenderLinks = ({ changeScreen, activeScreen }) => {
+  const [isOpen, setIsOpen] = useState(true);
   const links = [
     { nom: "about me ", toScreen: "about", icon: info },
     { nom: "education", toScreen: "education", icon: educationIcon },
@@ -48,18 +49,45 @@ const RenderLinks = ({ changeScreen }) => {
     { nom: "resume", toScreen: "resume", icon: resumeIcon },
   ];
   return (
-    <div className="bg-white w-1/6 border-r-[1px] border-gray-500 h-full flex flex-col gap-y-2">
-      <p>Ce Pc</p>
-      {links.map((link, index) => (
-        <a
-          key={index}
-          className="flex gap-x-2 items-center cursor-pointer capitalize hover:bg-gray-800 hover:text-white hover:bg-opacity-40 px-2"
-          onClick={() => changeScreen(link.toStcreen)}
-        >
-          <img src={link.icon} alt="" className="w-6" />
-          {link.nom}
-        </a>
-      ))}
+    <div className="bg-white w-1/6 border-r-[1px] border-opacity-30 border-gray-500 h-full flex flex-col gap-y-2">
+      <div
+        className="flex items-center  gap-x-2 cursor-pointer px-2 text-base font-medium"
+        onClick={() => setIsOpen((prev) => !prev)}
+      >
+        {isOpen ? (
+          <img
+            src={arrow}
+            alt=""
+            className="size-3 rotate-0 transition-all duration-150"
+          />
+        ) : (
+          <img
+            src={arrow}
+            alt=""
+            className="size-3 -rotate-90 transition-all duration-150"
+          />
+        )}
+        <div className="flex  items-center gap-x-2 font-medium">
+          <img src={computer} alt="" className="size-5" />
+          <p>Ce Pc</p>
+        </div>
+      </div>
+
+      {isOpen &&
+        links.map((link, index) => (
+          <a
+            key={index}
+            className={`p-1  flex gap-x-2 items-center cursor-pointer capitalize text-base font-medium ${
+              link.toScreen === activeScreen
+                ? "bg-cyan-300 bg-opacity-60 hover:bg-cyan-200"
+                : "hover:bg-cyan-300 hover:bg-opacity-10"
+            } px-2`}
+            onClick={() => changeScreen(link.toScreen)}
+          >
+            <img src={link.icon} alt="" className="w-5" />
+            {link.nom}
+          </a>
+        ))}
     </div>
   );
 };
@@ -72,7 +100,7 @@ export const displayAboutYoussef = () => {
 
 const ContentWrapper = ({ children }) => {
   return (
-    <div className="bg-white w-full h-full overflow-y-scroll">{children}</div>
+    <div className="bg-white w-full h-full overflow-y-auto">{children}</div>
   );
 };
 
@@ -111,21 +139,6 @@ const RsLinks = () => {
           </a>
         </div>
       ))}
-    </div>
-  );
-};
-
-const SearchBar = ({ screen, changeScreen }) => {
-  const [screens, setScreens] = useState(screen);
-  const [searchedScreens, setSearchedScreens] = useState({});
-
-  return (
-    <div className="bg-white text-center py-2">
-      <input
-        type="text"
-        className="w-3/4 border-[1px] focus:border-black px-1"
-        placeholder="SEARCH FOLDERS"
-      />
     </div>
   );
 };
