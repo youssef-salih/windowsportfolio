@@ -26,6 +26,12 @@ import git from "./techs/git.svg";
 import html from "./techs/html5.svg";
 import python from "./techs/python.svg";
 import sass from "./techs/sass.svg";
+import react from "./techs/reactjs.svg";
+import next from "./techs/nextjs.svg";
+import node from "./techs/nodejs.svg";
+import tailwind from "./techs/tailwindcss.svg";
+import redux from "./techs/redux.svg";
+
 export {
   windowsBoot,
   power,
@@ -55,4 +61,9 @@ export {
   html,
   python,
   sass,
+  next,
+  node,
+  react,
+  redux,
+  tailwind,
 };

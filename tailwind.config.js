@@ -52,9 +52,9 @@ export default {
         "-10": "-10",
       },
     },
-    fontFamily:{
-      "genos":"Genos"
-    }
+    fontFamily: {
+      genos: "Genos",
+    },
   },
   plugins: [],
 };

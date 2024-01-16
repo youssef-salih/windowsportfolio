@@ -6,15 +6,15 @@ import Spotify from "../apps/Spotify";
 
 const WindowTitle = ({ title, icon }) => {
   return (
-    <div
-      className={
-        "title  relative bg-white border-t-2 border-white border-opacity-5  px-3 text-black w-full select-none flex justify-between items-center"
-      }
-    >
-      <div className="  flex items-center justify-between gap-x-2">
+    <div className="flex bg-white">
+      <div
+        className={
+          "title  relative  border-t-2 border-white border-opacity-5  px-3 text-black w-full select-none flex gap-x-3 items-center"
+        }
+      >
         <img src={icon} alt={title} className="size-4" />
         <p className="font-semibold text-sm">{title}</p>
-      </div>
+      </div>{" "}
       <div className="flex gap-x-2 items-center  ">
         <WindowEdit />
       </div>
@@ -62,7 +62,7 @@ const Window = ({ minimized, isFocused, screen, title, icon }) => {
           width: "60%",
           height: "80%",
         }}
-        minWidth="50%"
+        minWidth="40%"
         minHeight="30%"
         dragHandleClassName="title"
       >

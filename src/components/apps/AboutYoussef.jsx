@@ -10,13 +10,18 @@ import {
   info,
   js,
   linkedin,
+  next,
+  node,
   projectIcon,
   python,
+  react,
+  redux,
   resumeIcon,
   sass,
   settings,
+  tailwind,
 } from "../../assets/images/icons";
-
+import resume from "../../assets/resumeYs.pdf";
 const AboutYoussef = () => {
   const [screen, setScreen] = useState({
     about: <About />,
@@ -39,6 +44,8 @@ const AboutYoussef = () => {
     </div>
   );
 };
+
+//side links
 const RenderLinks = ({ changeScreen, activeScreen }) => {
   const [isOpen, setIsOpen] = useState(true);
   const links = [
@@ -54,19 +61,13 @@ const RenderLinks = ({ changeScreen, activeScreen }) => {
         className="flex items-center  gap-x-2 cursor-pointer px-2 text-base font-medium"
         onClick={() => setIsOpen((prev) => !prev)}
       >
-        {isOpen ? (
-          <img
-            src={arrow}
-            alt=""
-            className="size-3 rotate-0 transition-all duration-150"
-          />
-        ) : (
-          <img
-            src={arrow}
-            alt=""
-            className="size-3 -rotate-90 transition-all duration-150"
-          />
-        )}
+        <img
+          src={arrow}
+          alt="arrow"
+          className={`size-3 ${
+            isOpen ? "rotate-0" : "-rotate-90"
+          } transition-all duration-150`}
+        />
         <div className="flex  items-center gap-x-2 font-medium">
           <img src={computer} alt="" className="size-5" />
           <p>Ce Pc</p>
@@ -100,7 +101,9 @@ export const displayAboutYoussef = () => {
 
 const ContentWrapper = ({ children }) => {
   return (
-    <div className="bg-white w-full h-full overflow-y-auto">{children}</div>
+    <div className="bg-white w-full h-full overflow-y-auto px-8">
+      {children}
+    </div>
   );
 };
 
@@ -144,13 +147,16 @@ const RsLinks = () => {
 };
 
 // screens UI
-const TitleAbout = ({ children }) => {
-  return <h1 className="text-center text-3xl font-semibold ">{children}</h1>;
+const TitleAboutYoussef = ({ children }) => {
+  return (
+    <h1 className="text-center text-3xl font-semibold mb-8">{children}</h1>
+  );
 };
+// about
 
 const About = () => {
   return (
-    <div className="flex flex-col items-center  gap-y-8 p-4 min-h-0">
+    <div className="flex flex-col items-center  gap-y-8  min-h-0">
       <img src={settings} alt="" className="w-1/5" />
       <p className="font-semibold text-xl">
         my name is{" "}
@@ -173,7 +179,7 @@ const About = () => {
     </div>
   );
 };
-
+// education
 const Education = () => {
   const EduInfo = [
     {
@@ -199,7 +205,7 @@ const Education = () => {
   ];
   return (
     <>
-      <TitleAbout>Education</TitleAbout>
+      <TitleAboutYoussef>Education</TitleAboutYoussef>
 
       <ul className="list-disc px-8">
         {EduInfo.map((info, index) => (
@@ -213,95 +219,56 @@ const Education = () => {
     </>
   );
 };
+
+//skills screen
+
+const TechItem = ({ tech }) => (
+  <div
+    className={`${
+      tech.color === "black" ? "bg-black" : `bg-${tech.color}-500`
+    } p-1 rounded flex items-center gap-1`}
+  >
+    {tech.icon && <img src={tech.icon} alt="" className="w-4 invert" />}
+    <p className="text-white capitalize">{tech.nom}</p>
+  </div>
+);
+
 const TechsUI = () => {
   const techs = [
     //languages
     [
-      {
-        nom: "javascript",
-        color: "yellow",
-        icon: js,
-      },
-      {
-        nom: "python",
-        color: "blue",
-        icon: python,
-      },
-      {
-        nom: "sass",
-        color: "pink",
-        icon: sass,
-      },
-      {
-        nom: "html5",
-        color: "orange",
-        icon: html,
-      },
-
-      {
-        nom: "git",
-        color: "rose",
-        icon: git,
-      },
-    ], //frameworks
+      { nom: "javascript", color: "yellow", icon: js },
+      { nom: "python", color: "blue", icon: python },
+      { nom: "sass", color: "pink", icon: sass },
+      { nom: "html5", color: "orange", icon: html },
+      { nom: "git", color: "rose", icon: git },
+    ],
+    //frameworks
     [
-      {
-        nom: "next",
-        color: "black",
-        icon: "",
-      },
-      {
-        nom: "",
-        color: "",
-        icon: "",
-      },
-      {
-        nom: "",
-        color: "",
-        icon: "",
-      },
-      {
-        nom: "",
-        color: "",
-        icon: "",
-      },
-      {
-        nom: "",
-        color: "",
-        icon: "",
-      },
+      { nom: "next", color: "black", icon: next },
+      { nom: "react", color: "blue", icon: react },
+      { nom: "tailwindcss", color: "cyan", icon: tailwind },
+      { nom: "nodejs", color: "green", icon: node },
+      { nom: "redux", color: "violet", icon: redux },
     ],
   ];
+
   return (
     <div className="flex justify-center gap-x-36 px-4">
-      <div className="flex flex-col items-center">
-        <h1 className="">languages & tools</h1>
-        <div className="flex flex-wrap  gap-x-2 ">
-          {techs[0].map((tech, index) => (
-            <div
-              key={index}
-              className={`bg-${tech.color}-500 p-1 rounded  flex items-center gap-1`}
-            >
-              <img src={tech.icon} alt="" className="w-4 invert" />
-              <p className="text-white">{tech.nom}</p>
-            </div>
-          ))}
+      {techs.map((category, categoryIndex) => (
+        <div key={categoryIndex} className="flex flex-col items-center">
+          <h1 className="">
+            {categoryIndex === 0
+              ? "languages & tools"
+              : "frameworks & libraries"}
+          </h1>
+          <div className="flex flex-wrap gap-2">
+            {category.map((tech, index) => (
+              <TechItem key={index} tech={tech} />
+            ))}
+          </div>
         </div>
-      </div>
-      <div className="flex flex-col items-center">
-        {/* <h1 className="">frameworks & libraries</h1>
-        <div className="flex flex-wrap  gap-x-2 ">
-          {techs[1].map((tech, index) => (
-            <div
-              key={index}
-              className={`bg-${tech.color}-500 p-1 rounded  flex items-center gap-1`}
-            >
-              <img src={tech.icon} alt="" className="w-4 invert" />
-              <p className="text-white">{tech.nom}</p>
-            </div>
-          ))}
-        </div> */}
-      </div>
+      ))}
     </div>
   );
 };
@@ -309,33 +276,78 @@ const TechsUI = () => {
 const Skills = () => {
   return (
     <>
-      <TitleAbout>Technical Skills</TitleAbout>
-      <p>
-        I have experience with a diverse range of programming languages and
-        frameworks.
-      </p>
-      <p>
-        I excel in front-end development, with expertise in
-        <span className="text-blue-500"> React.js and JavaScript!</span>
-      </p>
-      <p>Here are my most frequenly used</p>
+      <TitleAboutYoussef>Technical Skills</TitleAboutYoussef>
+      <div className="px-4 font-medium my-12">
+        <p>
+          I have experience with a diverse range of programming languages and
+          frameworks.
+        </p>
+        <p>
+          I excel in front-end development, with expertise in
+          <span className="text-blue-500"> React.js and JavaScript!</span>
+        </p>
+        <p>Here are my most frequenly used</p>
+      </div>
+
       <TechsUI />
     </>
   );
 };
 
+// projects
+
+const ProjectsItem = ({ nom, tech, desc }) => {
+  return (
+    <a className="group ">
+      <div className=" border-2 p-3 w-full rounded group-hover:border-black group-hover:duration-500 group-hover:transition-all group-hover:ease-in-out">
+        <h1 className="text-2xl font-medium">{nom}</h1>
+        <p className="before:block flex items-center gap-x-2 before:w-1 before:rounded before:h-1 before:bg-black my-2">
+          {desc}
+        </p>
+        {tech.map((techno, index) => (
+          <span
+            key={index}
+            className="p-1 border border-black border-opacity-25 rounded-md mr-2"
+          >
+            {techno}
+          </span>
+        ))}
+      </div>
+    </a>
+  );
+};
+
 const Projects = () => {
+  const projects = [
+    {
+      nom: "porfolio windows theme",
+      desc: "Persolnal portrfolio website of theme windows 11 ",
+      techs: ["react", "tailwind"],
+    },
+  ];
   return (
     <>
-      <TitleAbout>Technical Projects</TitleAbout>
+      <TitleAboutYoussef>Technical Projects</TitleAboutYoussef>
+      {projects.map((project, index) => (
+        <React.Fragment key={index}>
+          <ProjectsItem
+            nom={project.nom}
+            desc={project.desc}
+            tech={project.techs}
+          />
+        </React.Fragment>
+      ))}
     </>
   );
 };
 
+// resume
 const Resume = () => {
   return (
     <>
-      <TitleAbout>Technical Resume</TitleAbout>
+      <TitleAboutYoussef>Technical Resume</TitleAboutYoussef>
+
+      <iframe src={resume} frameborder="0" className="w-full h-full "></iframe>
     </>
   );
 };
