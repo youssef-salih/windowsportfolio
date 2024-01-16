@@ -52,6 +52,9 @@ export default {
         "-10": "-10",
       },
     },
+    fontFamily:{
+      "genos":"Genos"
+    }
   },
   plugins: [],
 };

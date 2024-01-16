@@ -15,7 +15,17 @@ import close from "./close.svg";
 import github from "./github.svg";
 import linkedin from "./linkedIn.svg";
 import winInfo from "./winInfo.svg";
-
+import arrow from "./arrow.svg";
+import computer from "./Computer.png";
+import info from "./Info.png";
+import educationIcon from "./LibrayDocuments.png";
+import projectIcon from "./FolderFavourites.png";
+import resumeIcon from "./FolderDocuments.png";
+import js from "./techs/js.svg";
+import git from "./techs/git.svg";
+import html from "./techs/html5.svg";
+import python from "./techs/python.svg";
+import sass from "./techs/sass.svg";
 export {
   windowsBoot,
   power,
@@ -34,4 +44,15 @@ export {
   github,
   linkedin,
   winInfo,
+  computer,
+  arrow,
+  info,
+  educationIcon,
+  projectIcon,
+  resumeIcon,
+  js,
+  git,
+  html,
+  python,
+  sass,
 };

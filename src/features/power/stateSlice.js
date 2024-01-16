@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   screenLocked: true,
   shutDownScreen: false,
-  bootingScreen:true,
+  bootingScreen: false,
 };
 
 const stateSlice = createSlice({
