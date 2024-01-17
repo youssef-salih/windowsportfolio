@@ -50,7 +50,7 @@ const WindowsShowApps = ({ isShown }) => {
               alt=""
               className="w-16 mx-2 hover:bg-ub-gray p-2 transition-all duration-200 rounded-md"
             />
-            <p className="text-white">{app.title}</p>
+            <p className="text-black">{app.title}</p>
           </div>
         ))}
       </div>

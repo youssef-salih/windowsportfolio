@@ -26,6 +26,7 @@ import {
 import { displayAboutYoussef } from "./src/components/apps/AboutYoussef";
 import { displayChrome } from "./src/components/apps/Chrome";
 import Spotify, { displaySpotify } from "./src/components/apps/Spotify";
+import { displayVsCode } from "./src/components/apps/Vscode";
 
 const apps = [
   {
@@ -53,16 +54,7 @@ const apps = [
     disabled: false,
     favourite: true,
     desktop_shortcut: true,
-    screen: displayAboutYoussef,
-  },
-  {
-    id: "calc",
-    title: "Calc",
-    icon: calc,
-    disabled: false,
-    favourite: true,
-    desktop_shortcut: false,
-    // screen: displayTerminalCalc,
+    // screen: displayAboutYoussef,
   },
 
   {
@@ -72,36 +64,46 @@ const apps = [
     disabled: false,
     favourite: true,
     desktop_shortcut: false,
-    // screen: displayVsCode,
+    screen: displayVsCode,
   },
-  {
-    id: "terminal",
-    title: "Terminal",
-    icon: cmd,
-    disabled: false,
-    favourite: true,
-    desktop_shortcut: false,
-    // screen: displayTerminal,
-  },
+  // {
+  //   id: "calc",
+  //   title: "Calc",
+  //   icon: calc,
+  //   disabled: false,
+  //   favourite: true,
+  //   desktop_shortcut: false,
+  //   // screen: displayTerminalCalc,
+  // },
 
-  {
-    id: "settings",
-    title: "Settings",
-    icon: settings,
-    disabled: false,
-    favourite: true,
-    desktop_shortcut: false,
-    // screen: displaySettings,
-  },
-  {
-    id: "trash",
-    title: "Trash",
-    icon: trashEmpty,
-    disabled: false,
-    favourite: false,
-    desktop_shortcut: true,
-    // screen: displayTrash,
-  },
+  // {
+  //   id: "terminal",
+  //   title: "Terminal",
+  //   icon: cmd,
+  //   disabled: false,
+  //   favourite: true,
+  //   desktop_shortcut: false,
+  //   // screen: displayTerminal,
+  // },
+
+  // {
+  //   id: "settings",
+  //   title: "Settings",
+  //   icon: settings,
+  //   disabled: false,
+  //   favourite: true,
+  //   desktop_shortcut: false,
+  //   // screen: displaySettings,
+  // },
+  // {
+  //   id: "trash",
+  //   title: "Trash",
+  //   icon: trashEmpty,
+  //   disabled: false,
+  //   favourite: false,
+  //   desktop_shortcut: true,
+  //   // screen: displayTrash,
+  // },
   {
     id: "gedit",
     title: "Contact Me",

@@ -36,7 +36,7 @@ const Navbar = ({ shutDown, lockScreen }) => {
   };
 
   return (
-    <div className="main-navbar-vp absolute bottom-0 right-0 w-screen shadow-md flex flex-nowrap justify-between items-center bg-ub-gray text-ubt-gray text-sm select-none z-50">
+    <div className="main-navbar-vp absolute bottom-0 right-0 w-screen shadow-md flex flex-nowrap justify-between items-center bg-[#D6DDEF] text-sm select-none z-50">
       <div
         id="status-bar"
         tabIndex="0"

@@ -14,7 +14,7 @@ const WindowTitle = ({ title, icon }) => {
       >
         <img src={icon} alt={title} className="size-4" />
         <p className="font-semibold text-sm">{title}</p>
-      </div>{" "}
+      </div>
       <div className="flex gap-x-2 items-center  ">
         <WindowEdit />
       </div>
@@ -24,10 +24,10 @@ const WindowTitle = ({ title, icon }) => {
 const WindowEdit = () => {
   return (
     <>
-      <div className="hover:bg-ub-gray p-4">
+      <div className="hover:bg-gray-400 hover:bg-opacity-25 p-4">
         <img src={minimize} alt="minimize" className="w-4" />
       </div>
-      <div className="hover:bg-ub-gray p-4">
+      <div className="hover:bg-gray-400 hover:bg-opacity-25 p-4">
         <img src={maximize} alt="maximize" className="w-4" />
       </div>
       <div className="hover:bg-red-500 p-4 [&>img]:hover:invert">

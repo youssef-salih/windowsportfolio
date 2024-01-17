@@ -228,6 +228,7 @@ const TechItem = ({ tech }) => (
       tech.color === "black" ? "bg-black" : `bg-${tech.color}-500`
     } p-1 rounded flex items-center gap-1`}
   >
+    <p className="hidden bg-yellow-500 bg-rose-500 bg-black bg-pink-500 bg-orange-500 bg-blue-500 bg-violet-500 bg-cyan-500 bg-green-500"></p>
     {tech.icon && <img src={tech.icon} alt="" className="w-4 invert" />}
     <p className="text-white capitalize">{tech.nom}</p>
   </div>
