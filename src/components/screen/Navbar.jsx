@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Clock from "../utils_components/Clock";
 import { windowsBoot } from "../../assets/images/icons";
 import NavbarApp from "../base/NavbarApp";
@@ -7,8 +7,9 @@ import WindowsShowApps from "../utils_components/WindowsShowApps";
 
 // windows searchbar
 
-const Navbar = ({ shutDown, lockScreen }) => {
+const Navbar = ({ openWindow, closed_windows, lockScreen }) => {
   const [statusCard, setStatusCard] = useState(false);
+  const appsRef = useRef(null);
 
   let renderApps = () => {
     let sideBarAppsJsx = [];
@@ -25,6 +26,7 @@ const Navbar = ({ shutDown, lockScreen }) => {
             id={app.id}
             title={app.title}
             icon={app.icon}
+            open={openWindow}
             isClose={{}}
             isFocus={{}}
             isMinimized={{}}
@@ -35,6 +37,21 @@ const Navbar = ({ shutDown, lockScreen }) => {
     return sideBarAppsJsx;
   };
 
+  useEffect(() => {
+    // close windows menu
+    const handleOutsideClick = (event) => {
+      if (appsRef.current && !appsRef.current.contains(event.target)) {
+        setStatusCard(false);
+      }
+    };
+
+    document.addEventListener("click", handleOutsideClick);
+
+    return () => {
+      document.removeEventListener("click", handleOutsideClick);
+    };
+  }, []);
+
   return (
     <div className="main-navbar-vp absolute bottom-0 right-0 w-screen shadow-md flex flex-nowrap justify-between items-center bg-[#D6DDEF] text-sm select-none z-50">
       <div
@@ -44,23 +61,19 @@ const Navbar = ({ shutDown, lockScreen }) => {
           "hidden md:flex relative pr-3 pl-3 outline-none transition duration-100 ease-in-out border-b-2 border-transparent  py-1 "
         }
       />
-      <div className="flex  ">
+      <div className="flex justify-center" ref={appsRef}>
         <div
           tabIndex="0"
           className={
-            "mr-4 outline-none transition duration-100 ease-in-out border-b-2 border-transparent flex items-center focus:border-gray-400  "
+            " outline-none transition duration-100 ease-in-out border-b-2 border-transparent flex items-center justify-center focus:border-gray-400 cursor-pointer "
           }
           onClick={() => setStatusCard((prev) => !prev)}
         >
-          <img
-            src={windowsBoot}
-            alt={""}
-            width="28px"
-            height="28px"
-            className="w-7 ml-2"
-          />
+          <img src={windowsBoot} alt={""} className="w-12 p-2" />
         </div>
-        {statusCard ? <WindowsShowApps isShown={setStatusCard} /> : null}
+        {statusCard ? (
+          <WindowsShowApps isShown={setStatusCard} lockScreen={lockScreen} />
+        ) : null}
         {renderApps()}
       </div>
 

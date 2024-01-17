@@ -20,9 +20,11 @@ const Lock_screen = ({ bgImgName, unLockScreen }) => {
   useEffect(() => {
     if (screenLocked) {
       window.addEventListener("keydown", handleKeyPress);
+      window.addEventListener("click", handleKeyPress);
     }
     return () => {
       window.removeEventListener("keydown", handleKeyPress);
+      window.removeEventListener("click", handleKeyPress);
     };
   }, [screenLocked]);
 

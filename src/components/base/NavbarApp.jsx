@@ -7,7 +7,7 @@ const NavbarApp = ({
   isMinimized,
   isClose,
   isFocus,
-  // openAppProp,
+  open,
 }) => {
   const [showTitle, setShowTitle] = useState(false);
   const [scaleImage, setScaleImage] = useState(false);
@@ -18,24 +18,18 @@ const NavbarApp = ({
     }, 1000);
     setScaleImage(true);
   };
-  const openApp = () => {
-    if (!isMinimized[id] && isClose[id]) {
-      scaleImages();
-    }
-    // openAppProp(id);
-    setShowTitle(false);
-  };
+  // const openApp = () => {
+  //   if (!isMinimized[id] && isClose[id]) {
+  //     scaleImages();
+  //   }
+  //   // openAppProp(id);
+  //   setShowTitle(false);
+  // };
 
   return (
     <div
       tabIndex="0"
-      // onClick={openApp()}
-      // onMouseEnter={() => {
-      //   setShowTitle(true);
-      // }}
-      // onMouseLeave={() => {
-      //   setShowTitle(false);
-      // }}
+      onClick={() => open(id)}
       className={
         (isClose[id] === false && isFocus[id]
           ? "bg-white bg-opacity-10 "

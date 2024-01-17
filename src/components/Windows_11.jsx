@@ -22,6 +22,10 @@ const Windows11 = () => {
   const screenLocked = useSelector(screenLockedValue);
   const shutDownScreen = useSelector(shutDownScreenValue);
 
+  const [closed_windows, setClosed_windows] = useState({
+    "about-youssef": false,
+  });
+
   const [bootingScreen, setBootingScreen] = useState(true);
   const [bgImageName, setBgImageName] = useState("wall-1");
   const setTimeOutBootScreen = () => {
@@ -42,6 +46,7 @@ const Windows11 = () => {
     dispatch(screenOn());
     localStorage.setItem("screen-locked", false);
   };
+
   const turnOn = () => {
     // setShutDownScreen(false);
     dispatch(shutOnScreen());
@@ -92,6 +97,21 @@ const Windows11 = () => {
     return () => {};
   }, []);
 
+  // windows logic
+
+  const closeWindow = (id) => {
+    setClosed_windows((prevState) => ({
+      ...prevState,
+      [id]: true,
+    }));
+  };
+  const openWindow = (id) => {
+    setClosed_windows((prevState) => ({
+      ...prevState,
+      [id]: false,
+    }));
+  };
+
   return (
     <div className="w-screen h-screen overflow-hidden " id="monitor-screen">
       <Lock_screen
@@ -104,8 +124,17 @@ const Windows11 = () => {
         turnOn={turnOn}
         visible={bootingScreen}
       />
-      <Navbar lockScreen={lockScreen} shutDown={turnOn} />
-      <Desktop bgImageName={bgImageName} />
+      <Navbar
+        openWindow={openWindow}
+        closed_windows={closed_windows}
+        lockScreen={lockScreen}
+      />
+      <Desktop
+        bgImageName={bgImageName}
+        closeWindow={closeWindow}
+        openWindow={openWindow}
+        closed_windows={closed_windows}
+      />
     </div>
   );
 };

@@ -36,7 +36,7 @@ const apps = [
     disabled: false,
     favourite: true,
     desktop_shortcut: true,
-    // screen: displayChrome,
+    screen: displayChrome,
   },
   {
     id: "spotify",
@@ -45,7 +45,7 @@ const apps = [
     disabled: false,
     favourite: true,
     desktop_shortcut: false,
-    // screen: displaySpotify,
+    screen: displaySpotify,
   },
   {
     id: "about-youssef",
@@ -54,7 +54,7 @@ const apps = [
     disabled: false,
     favourite: true,
     desktop_shortcut: true,
-    // screen: displayAboutYoussef,
+    screen: displayAboutYoussef,
   },
 
   {

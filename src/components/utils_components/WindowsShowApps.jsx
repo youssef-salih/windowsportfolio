@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { magnify, power, settings } from "../../assets/images/icons";
 import apps from "../../../apps.config";
@@ -20,27 +20,23 @@ export const SearchWin = () => {
     </div>
   );
 };
-const Disconect = ({ isShown }) => {
+const Disconect = ({ isShown, lockScreen }) => {
   const screenLocked = useSelector(screenLockedValue);
   const dispatch = useDispatch();
+
   return (
     <div className="absolute bottom-0 h-12 bg-black w-full bg-opacity-60 rounded-b backdrop-blur-3xl  drop-shadow-lg flex justify-between items-center px-4">
       <img src={settings} alt="setting" className="w-8" />
-      <button
-        onClick={() => {
-          dispatch(screenOff());
-          isShown(false);
-        }}
-      >
+      <button onClick={lockScreen}>
         <img src={power} alt="" className="w-6 text-white invert" />
       </button>
     </div>
   );
 };
 
-const WindowsShowApps = ({ isShown }) => {
+const WindowsShowApps = ({ isShown, lockScreen }) => {
   return (
-    <div className="h-full min-h-[30rem] bg-white bg-opacity-20 backdrop-blur-md rounded drop-shadow-lg md:w-1/3 w-5/6 max-w-[503px] md:min-w-[503px]  absolute md:-top-4 top-0 left-0 md:left-auto -translate-y-full ">
+    <div className="h-full min-h-[30rem] bg-white bg-opacity-20 backdrop-blur-md rounded drop-shadow-lg md:w-1/3 w-5/6 max-w-[503px] md:min-w-[503px]  absolute md:-top-4 top-0 left-0 md:left-auto -translate-y-full">
       <SearchWin />
       <div className="grid grid-cols-4 gap-4 px-4 mt-2">
         {apps.map((app, index) => (
@@ -55,7 +51,7 @@ const WindowsShowApps = ({ isShown }) => {
         ))}
       </div>
 
-      <Disconect isShown={isShown} />
+      <Disconect isShown={isShown} lockScreen={lockScreen} />
     </div>
   );
 };

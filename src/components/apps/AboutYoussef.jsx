@@ -129,7 +129,7 @@ const RsLinks = () => {
           className="group relative [&>a>button]:hover:scale-150 transition-all "
           key={index}
         >
-          <a href={link.path}>
+          <a href={link.path} target="_blank">
             <button className="duration-500">
               <img src={link.icon} alt="" className="w-8" />
             </button>
@@ -348,7 +348,7 @@ const Resume = () => {
     <>
       <TitleAboutYoussef>Technical Resume</TitleAboutYoussef>
 
-      <iframe src={resume} frameborder="0" className="w-full h-full "></iframe>
+      <iframe src={resume} frameBorder="0" className="w-full h-full "></iframe>
     </>
   );
 };
