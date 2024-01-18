@@ -1,10 +1,8 @@
 import { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import {  useDispatch } from "react-redux";
 import {
   screenOn,
   screenOff,
-  screenLockedValue,
-  shutDownScreenValue,
   shutOnScreen,
   shutOffScreen,
 } from "../features/power/stateSlice";
@@ -12,19 +10,9 @@ import Lock_screen from "./screen/Lock_screen";
 import BootingScreen from "./screen/Booting_screen";
 import Navbar from "./screen/Navbar";
 import Desktop from "./screen/Desktop";
-import apps from "../../apps.config";
-import Window from "./base/Window";
 
 const Windows11 = () => {
   const dispatch = useDispatch();
-  // states from store
-  // lock screen
-  const screenLocked = useSelector(screenLockedValue);
-  const shutDownScreen = useSelector(shutDownScreenValue);
-
-  const [closed_windows, setClosed_windows] = useState({
-    "about-youssef": false,
-  });
 
   const [bootingScreen, setBootingScreen] = useState(true);
   const [bgImageName, setBgImageName] = useState("wall-1");
@@ -97,44 +85,12 @@ const Windows11 = () => {
     return () => {};
   }, []);
 
-  // windows logic
-
-  const closeWindow = (id) => {
-    setClosed_windows((prevState) => ({
-      ...prevState,
-      [id]: true,
-    }));
-  };
-  const openWindow = (id) => {
-    setClosed_windows((prevState) => ({
-      ...prevState,
-      [id]: false,
-    }));
-  };
-
   return (
     <div className="w-screen h-screen overflow-hidden " id="monitor-screen">
-      <Lock_screen
-        bgImgName={bgImageName}
-        isLocked={screenLocked}
-        unLockScreen={unLockScreen}
-      />
-      <BootingScreen
-        isShutDown={shutDownScreen}
-        turnOn={turnOn}
-        visible={bootingScreen}
-      />
-      <Navbar
-        openWindow={openWindow}
-        closed_windows={closed_windows}
-        lockScreen={lockScreen}
-      />
-      <Desktop
-        bgImageName={bgImageName}
-        closeWindow={closeWindow}
-        openWindow={openWindow}
-        closed_windows={closed_windows}
-      />
+      <Lock_screen bgImgName={bgImageName} unLockScreen={unLockScreen} />
+      <BootingScreen turnOn={turnOn} visible={bootingScreen} />
+      <Navbar lockScreen={lockScreen} />
+      <Desktop bgImageName={bgImageName} />
     </div>
   );
 };

@@ -1,12 +1,15 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { power, processLoad, windowsBoot } from "../../assets/images/icons";
+import { shutDownScreenValue } from "../../features/power/stateSlice";
 
-function BootingScreen({ visible, isShutDown, turnOn }) {
+function BootingScreen({ visible, turnOn }) {
+  const shutDownScreen = useSelector(shutDownScreenValue);
   return (
     <div
-      style={visible || isShutDown ? { zIndex: "100" } : { zIndex: "-20" }}
+      style={visible || shutDownScreen ? { zIndex: "100" } : { zIndex: "-20" }}
       className={
-        (visible || isShutDown
+        (visible || shutDownScreen
           ? " visible opacity-100"
           : " invisible opacity-0 ") +
         " absolute duration-500 select-none flex flex-col justify-around items-center top-0 right-0 overflow-hidden m-0 p-0 h-screen w-screen bg-black"
@@ -23,7 +26,7 @@ function BootingScreen({ visible, isShutDown, turnOn }) {
         className="w-10 h-10 flex justify-center items-center rounded-full outline-none cursor-pointer"
         onClick={turnOn}
       >
-        {isShutDown ? (
+        {shutDownScreen ? (
           <div className="bg-white rounded-full flex justify-center items-center w-10 h-10 hover:bg-gray-300">
             <img
               width="32px"

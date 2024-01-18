@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import BackgroundImage from "../utils_components/BackgroundImages";
 import Window from "../base/Window";
 import apps from "../../../apps.config";
+import { closed_windowsValue } from "../../features/apps/appsSlice";
 
-const Desktop = ({ closed_windows, bgImageName, closeWindow, openWindow }) => {
+const Desktop = ({ bgImageName }) => {
+  const closed_windows = useSelector(closed_windowsValue);
   const renderWindows = () => {
     let windowsJsx = [];
     apps.forEach((app, index) => {
@@ -15,7 +18,6 @@ const Desktop = ({ closed_windows, bgImageName, closeWindow, openWindow }) => {
             title={app.title}
             screen={app.screen}
             icon={app.icon}
-            closed_windows={closeWindow}
           />
         );
       }
@@ -26,7 +28,6 @@ const Desktop = ({ closed_windows, bgImageName, closeWindow, openWindow }) => {
   return (
     <div className="h-full w-full flex flex-col items-end justify-start content-start flex-wrap-reverse bg-transparent relative overflow-hidden overscroll-none window-parent">
       <BackgroundImage img={bgImageName} />
-
       <div
         className="absolute h-full w-full bg-transparent"
         data-context="desktop-area"

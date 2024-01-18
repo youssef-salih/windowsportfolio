@@ -7,7 +7,7 @@ import WindowsShowApps from "../utils_components/WindowsShowApps";
 
 // windows searchbar
 
-const Navbar = ({ openWindow, closed_windows, lockScreen }) => {
+const Navbar = ({ lockScreen }) => {
   const [statusCard, setStatusCard] = useState(false);
   const appsRef = useRef(null);
 
@@ -19,15 +19,13 @@ const Navbar = ({ openWindow, closed_windows, lockScreen }) => {
           key={index}
           tabIndex="0"
           className={
-            " outline-none transition duration-100 ease-in-out border-b-2 border-transparent flex focus:border-gray-400  "
+            " outline-none transition duration-100 ease-in-out border-b-2 border-transparent flex  "
           }
         >
           <NavbarApp
             id={app.id}
             title={app.title}
             icon={app.icon}
-            open={openWindow}
-            isClose={{}}
             isFocus={{}}
             isMinimized={{}}
           />

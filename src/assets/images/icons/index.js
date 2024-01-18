@@ -10,6 +10,7 @@ import trashEmpty from "./TrashEmpty.png";
 import trashFull from "./TrashFull.png";
 import magnify from "./Magnify.svg";
 import maximize from "./maximize.svg";
+import maximize2 from "./maximize2.svg";
 import minimize from "./minimize.svg";
 import close from "./close.svg";
 import github from "./github.svg";
@@ -46,6 +47,7 @@ export {
   magnify,
   minimize,
   maximize,
+  maximize2,
   close,
   github,
   linkedin,
