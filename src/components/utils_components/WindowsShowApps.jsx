@@ -9,6 +9,7 @@ import {
 } from "../../features/power/stateSlice";
 import { openApp } from "../../features/apps/appsSlice";
 
+
 export const SearchWin = ({ handleSearchChange }) => {
   return (
     <div className="border-b-2 border-[#5BBDD6] bg-[#19233A] mx-4 rounded-sm mt-2 p-1 flex">
@@ -23,12 +24,15 @@ export const SearchWin = ({ handleSearchChange }) => {
   );
 };
 const Disconect = ({ lockScreen }) => {
-  const screenLocked = useSelector(screenLockedValue);
   const dispatch = useDispatch();
-  console.log(screenLocked);
   return (
     <div className="absolute bottom-0 h-12 bg-black w-full bg-opacity-60 rounded-b backdrop-blur-3xl  drop-shadow-lg flex justify-between items-center px-4">
-      <img src={settings} alt="setting" className="w-8" />
+      <img
+        src={settings}
+        alt="setting"
+        className="w-8"
+        onClick={() => dispatch(openApp("settings"))}
+      />
       <button onClick={lockScreen}>
         <img src={power} alt="" className="w-6 text-white invert" />
       </button>

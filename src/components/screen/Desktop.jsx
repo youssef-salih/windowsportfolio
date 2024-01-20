@@ -4,8 +4,10 @@ import BackgroundImage from "../utils_components/BackgroundImages";
 import Window from "../base/Window";
 import apps from "../../../apps.config";
 import { closed_windowsValue } from "../../features/apps/appsSlice";
+import { bgImageValue } from "../../features/power/stateSlice";
 
-const Desktop = ({ bgImageName }) => {
+const Desktop = () => {
+  
   const closed_windows = useSelector(closed_windowsValue);
   const renderWindows = () => {
     let windowsJsx = [];
@@ -27,7 +29,7 @@ const Desktop = ({ bgImageName }) => {
 
   return (
     <div className="h-full w-full flex flex-col items-end justify-start content-start flex-wrap-reverse bg-transparent relative overflow-hidden overscroll-none window-parent">
-      <BackgroundImage img={bgImageName} />
+      <BackgroundImage  />
       <div
         className="absolute h-full w-full bg-transparent"
         data-context="desktop-area"

@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
-import {  useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import {
   screenOn,
   screenOff,
   shutOnScreen,
   shutOffScreen,
+  bgImageValue,
+  changeBg,
 } from "../features/power/stateSlice";
 import Lock_screen from "./screen/Lock_screen";
 import BootingScreen from "./screen/Booting_screen";
@@ -15,7 +17,10 @@ const Windows11 = () => {
   const dispatch = useDispatch();
 
   const [bootingScreen, setBootingScreen] = useState(true);
-  const [bgImageName, setBgImageName] = useState("wall-1");
+  
+
+  const bgImage = useSelector(bgImageValue);
+
   const setTimeOutBootScreen = () => {
     setTimeout(() => {
       setBootingScreen(false);
@@ -52,7 +57,9 @@ const Windows11 = () => {
     // Get Previously selected Background Image
     let bgImageName = localStorage.getItem("bg-image");
     if (bgImageName !== null && bgImageName !== undefined) {
-      setBgImageName(bgImageName);
+      dispatch(changeBg(bgImageName));
+    } else {
+      localStorage.setItem("bg-image", bgImage);
     }
 
     let bootingScreen = localStorage.getItem("booting_screen");
@@ -81,16 +88,16 @@ const Windows11 = () => {
 
   useEffect(() => {
     getLocalData();
-    localStorage.setItem("bg-image", "wall-1");
+
     return () => {};
   }, []);
 
   return (
     <div className="w-screen h-screen overflow-hidden " id="monitor-screen">
-      <Lock_screen bgImgName={bgImageName} unLockScreen={unLockScreen} />
+      <Lock_screen  unLockScreen={unLockScreen} />
       <BootingScreen turnOn={turnOn} visible={bootingScreen} />
       <Navbar lockScreen={lockScreen} />
-      <Desktop bgImageName={bgImageName} />
+      <Desktop  />
     </div>
   );
 };

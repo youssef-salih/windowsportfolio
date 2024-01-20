@@ -1,16 +1,29 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { wall1 } from "../../assets/images/bg";
+import { wall1, wall2, wall3, wall4 } from "../../assets/images/bg";
 import Clock from "../utils_components/Clock";
-import { screenLockedValue } from "../../features/power/stateSlice";
+import {
+  bgImageValue,
+  screenLockedValue,
+} from "../../features/power/stateSlice";
 
 // eslint-disable-next-line react/prop-types
-const Lock_screen = ({ bgImgName, unLockScreen }) => {
+const Lock_screen = ({ unLockScreen }) => {
   const screenLocked = useSelector(screenLockedValue);
-
+  const bgImgName = useSelector(bgImageValue);
   const wallpapers = {
     "wall-1": wall1,
   };
+  const wallpapers1 = [
+    { id: "wall-1", image: wall1 },
+    { id: "wall-2", image: wall2 },
+    { id: "wall-3", image: wall3 },
+    { id: "wall-4", image: wall4 },
+
+  ];
+  const selectedWallpaper = wallpapers1.find(
+    (wallpaper) => wallpaper.id === bgImgName
+  );
 
   const handleKeyPress = (event) => {
     event.preventDefault();
@@ -41,7 +54,7 @@ const Lock_screen = ({ bgImgName, unLockScreen }) => {
     >
       <div
         style={{
-          backgroundImage: `url(${wallpapers[bgImgName]})`,
+          backgroundImage: `url(${selectedWallpaper.image})`,
           backgroundSize: "cover",
           backgroundRepeat: "no-repeat",
           backgroundPositionX: "center",

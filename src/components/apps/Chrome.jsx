@@ -65,7 +65,7 @@ const Chrome = () => {
 
   const displayUrlBar = () => {
     return (
-      <div className="w-full pt-0.5 pb-1 flex justify-start items-center text-white text-sm border-b border-gray-900">
+      <div className="w-full pt-0.5 pb-1 flex justify-start items-center text-black bg-gray-500 text-sm border-b border-gray-900">
         <div
           onClick={refreshChrome}
           className=" ml-2 mr-1 flex justify-center items-center rounded-full bg-gray-50 bg-opacity-0 hover:bg-opacity-10"
@@ -80,14 +80,18 @@ const Chrome = () => {
           onClick={goToHome}
           className=" mr-2 ml-1 flex justify-center items-center rounded-full bg-gray-50 bg-opacity-0 hover:bg-opacity-10"
         >
-          <img className="w-5" src={chrome_home} alt="Ubuntu Chrome Home" />
+          <img
+            className="w-5"
+            src={chrome_home}
+            alt="Ubuntu Chrome Home"
+          />
         </div>
         <input
           onKeyDown={checkKey}
           onChange={handleDisplayUrl}
           value={display_url}
           id="chrome-url-bar"
-          className="outline-none bg-ub-grey rounded-full pl-3 py-0.5 mr-3 w-5/6 text-gray-300 focus:text-white"
+          className="outline-none bg-ub-grey rounded-full pl-3 py-0.5 mr-3 w-5/6 text-black   "
           type="url"
           spellCheck={false}
           autoComplete="off"

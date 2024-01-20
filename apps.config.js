@@ -25,6 +25,7 @@ import {
 } from "./src/assets/images/themes/app";
 import { displayAboutYoussef } from "./src/components/apps/AboutYoussef";
 import { displayChrome } from "./src/components/apps/Chrome";
+import { displaySettings } from "./src/components/apps/Settings";
 import Spotify, { displaySpotify } from "./src/components/apps/Spotify";
 import { displayVsCode } from "./src/components/apps/Vscode";
 
@@ -84,17 +85,16 @@ const apps = [
   //   favourite: true,
   //   desktop_shortcut: false,
   //   // screen: displayTerminal,
-  // },
-
-  // {
-  //   id: "settings",
-  //   title: "Settings",
-  //   icon: settings,
-  //   disabled: false,
-  //   favourite: true,
-  //   desktop_shortcut: false,
-  //   // screen: displaySettings,
-  // },
+  // }
+  {
+    id: "settings",
+    title: "Settings",
+    icon: settings,
+    disabled: false,
+    favourite: true,
+    desktop_shortcut: false,
+    screen: displaySettings,
+  },
   // {
   //   id: "trash",
   //   title: "Trash",
