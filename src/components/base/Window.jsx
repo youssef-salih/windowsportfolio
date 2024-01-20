@@ -11,6 +11,8 @@ import Chrome from "../apps/Chrome";
 import Spotify from "../apps/Spotify";
 import {
   closeApp,
+  focusApp,
+  focused_windowsValue,
   maximizeApp,
   maximized_windowsValue,
   minimizeApp,
@@ -22,7 +24,7 @@ const WindowTitle = ({ id, title, icon }) => {
     <div className="flex  w-full">
       <div
         className={
-          "title  relative px-3 text-black w-full select-none flex gap-x-3 items-center"
+          "title relative px-3 text-black w-full select-none flex gap-x-3 items-center"
         }
       >
         <img src={icon} alt={title} className="size-4" />
@@ -31,21 +33,27 @@ const WindowTitle = ({ id, title, icon }) => {
     </div>
   );
 };
-const WindowEdit = ({ id, maxi }) => {
+const WindowEdit = ({ id, checkMinimised, checkMaximized }) => {
   const minimized = useSelector(minimized_windowsValue);
   const dispatch = useDispatch();
   return (
     <div className="flex gap-x-2 items- justify-between">
       <div
         className="hover:bg-gray-400 hover:bg-opacity-25 p-4"
-        onClick={() => dispatch(minimizeApp(id))}
+        onClick={() => {
+          dispatch(minimizeApp(id));
+          checkMinimised(id);
+        }}
       >
         <img src={minimize} alt="minimize" className="w-4" />
       </div>
 
       <div
         className="hover:bg-gray-400 hover:bg-opacity-25 p-4"
-        onClick={() => dispatch(maximizeApp(id))}
+        onClick={() => {
+          dispatch(maximizeApp(id));
+          checkMaximized(id);
+        }}
       >
         <img src={maximize} alt="maximize" className="w-4" />
       </div>
@@ -84,7 +92,12 @@ function useWindowSize() {
   return state;
 }
 
-const Window = ({ id, isFocused, screen, title, icon }) => {
+const Window = ({ id, screen, title, icon }) => {
+  const focused_windows = useSelector(focused_windowsValue);
+  const [isfoc, setIsfoc] = useState(false);
+
+  const dispatch = useDispatch();
+
   const { winWidth, winHeight } = useWindowSize();
   const [width, setWidth] = useState("60%");
   const [height, setHeight] = useState("80%");
@@ -109,7 +122,7 @@ const Window = ({ id, isFocused, screen, title, icon }) => {
   };
 
   const checkMaximized = (id) => {
-    if (maximized[id] === true) {
+    if (maximized[id] === false) {
       setMaxi(true);
       setPosition({ x: 0, y: 0 });
     } else {
@@ -123,53 +136,63 @@ const Window = ({ id, isFocused, screen, title, icon }) => {
     setPosition({ x: d.x, y: d.y });
   };
 
+  const handleMouseDown = (e) => {
+    e.stopPropagation();
+    dispatch(focusApp(id));
+    setIsfoc(true);
+  };
+
   useEffect(() => {
     checkMinimised(id);
-    checkMaximized(id);
-  }, [minimized, maximized]);
+    setIsfoc(focused_windows[id] === true);
+  }, [minimized, focused_windows]);
 
   return (
-    <>
-      <Rnd
-        bounds={"parent"}
-        size={{ width: maxi ? "100%" : width, height: maxi ? "100%" : height }}
-        position={position} // Use the position state
-        onDragStop={handleDragStop} // Handle drag stop event
-        onResizeStop={(e, direction, ref, delta, position) => {
-          setWidth(ref.style.width);
-          setHeight(ref.style.height);
-        }}
-        minWidth="40%"
-        minHeight="30%"
-        dragHandleClassName="title"
-        disableDragging={maxi}
+    <Rnd
+      bounds={"parent"}
+      size={{ width: maxi ? "100%" : width, height: maxi ? "100%" : height }}
+      position={position}
+      onDragStop={handleDragStop}
+      onResizeStop={(e, direction, ref, delta, position) => {
+        setWidth(ref.style.width);
+        setHeight(ref.style.height);
+      }}
+      onMouseDown={handleMouseDown}
+      minWidth="40%"
+      minHeight="30%"
+      dragHandleClassName={`title`}
+      disableDragging={maxi}
+      className={
+        "duration-75 " +
+        (minim
+          ? " opacity-0 invisible -translate-y-32 "
+          : "opacity-1 visible ") +
+        (maxi ? " !duration-300 " : " ") +
+        (isfoc ? `z-[49]` : `z-[30]`)
+      }
+      id={`window-${id}`}
+    >
+      <div
         className={
-          "duration-75 " +
-          (minim
-            ? "opacity-0  invisible transition-all -translate-y-32 "
-            : "opacity-1 visible ") +
-          (maxi ? " !duration-300 " : " ")
+          cursorType +
+          " " +
+          (closed ? "closed-window" : "") +
+          " opened-window min-w-1/4 min-h-1/4 main-window absolute window-shadow border-whhite border-opacity-40 border border-t-0 flex flex-col w-full h-full"
         }
       >
-        <div
-          className={
-            cursorType +
-            " " +
-            (closed ? "closed-window" : "") +
-            " " +
-            (isFocused ? "z-30" : "z-20 notFocused") +
-            " opened-window min-w-1/4 min-h-1/4 main-window absolute window-shadow border-whhite border-opacity-40 border border-t-0 flex flex-col w-full h-full"
-          }
-        >
-          <div className="flex justify-between bg-white border-b-2 border-gray-500 border-opacity-30">
-            <WindowTitle title={title} icon={icon} id={id} />
-            <WindowEdit id={id} maxi={maxi} />
-          </div>
-
-          <div className="overflow-hidden h-full bg-white">{screen()}</div>
+        <div className="flex justify-between bg-white border-b-2 border-gray-500 border-opacity-30">
+          <WindowTitle title={title} icon={icon} id={id} />
+          <WindowEdit
+            id={id}
+            maxi={maxi}
+            checkMinimised={checkMinimised}
+            checkMaximized={checkMaximized}
+          />
         </div>
-      </Rnd>
-    </>
+
+        <div className="overflow-hidden h-full bg-white">{screen()}</div>
+      </div>
+    </Rnd>
   );
 };
 
