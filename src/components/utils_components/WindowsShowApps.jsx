@@ -9,7 +9,6 @@ import {
 } from "../../features/power/stateSlice";
 import { openApp } from "../../features/apps/appsSlice";
 
-
 export const SearchWin = ({ handleSearchChange }) => {
   return (
     <div className="border-b-2 border-[#5BBDD6] bg-[#19233A] mx-4 rounded-sm mt-2 p-1 flex">

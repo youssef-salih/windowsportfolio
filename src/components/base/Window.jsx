@@ -18,6 +18,7 @@ import {
   minimizeApp,
   minimized_windowsValue,
 } from "../../features/apps/appsSlice";
+import useWindowSize from "../../nooks/useWindow";
 
 const WindowTitle = ({ id, title, icon }) => {
   return (
@@ -28,7 +29,7 @@ const WindowTitle = ({ id, title, icon }) => {
         }
       >
         <img src={icon} alt={title} className="size-4" />
-        <p className="font-semibold text-sm">{title}</p>
+        <p className="font-semibold md:text-sm text-xs ">{title}</p>
       </div>
     </div>
   );
@@ -39,58 +40,36 @@ const WindowEdit = ({ id, checkMinimised, checkMaximized }) => {
   return (
     <div className="flex gap-x-2 items- justify-between">
       <div
-        className="hover:bg-gray-400 hover:bg-opacity-25 p-4"
+        className="hover:bg-gray-400 hover:bg-opacity-25 lg:p-4  p-1 flex items-center "
         onClick={() => {
           dispatch(minimizeApp(id));
           checkMinimised(id);
         }}
       >
-        <img src={minimize} alt="minimize" className="w-4" />
+        <img src={minimize} alt="minimize" className="lg:w-4 w-5" />
       </div>
 
       <div
-        className="hover:bg-gray-400 hover:bg-opacity-25 p-4"
+        className="hover:bg-gray-400 hover:bg-opacity-25 lg:p-4 p-1 flex items-center "
         onClick={() => {
           dispatch(maximizeApp(id));
           checkMaximized(id);
         }}
       >
-        <img src={maximize} alt="maximize" className="w-4" />
+        <img src={maximize} alt="maximize" className="lg:w-4 w-5" />
       </div>
 
       <div
-        className="hover:bg-red-500 p-4 [&>img]:hover:invert"
+        className="hover:bg-red-500 lg:p-4  p-1 flex items-center [&>img]:hover:invert"
         onClick={() => dispatch(closeApp(id))}
       >
-        <img src={close} alt="close" className="w-4" />
+        <img src={close} alt="close" className="lg:w-4 w-5" />
       </div>
     </div>
   );
 };
 
-function useWindowSize() {
-  const [state, setState] = useState({
-    winWidth: window.innerWidth,
-    winHeight: window.innerHeight,
-  });
 
-  useEffect(() => {
-    const handler = () => {
-      setState({
-        winWidth: window.innerWidth,
-        winHeight: window.innerHeight,
-      });
-    };
-
-    window.addEventListener("resize", handler);
-
-    return () => {
-      window.removeEventListener("resize", handler);
-    };
-  }, []);
-
-  return state;
-}
 
 const Window = ({ id, screen, title, icon }) => {
   const focused_windows = useSelector(focused_windowsValue);
@@ -99,14 +78,14 @@ const Window = ({ id, screen, title, icon }) => {
   const dispatch = useDispatch();
 
   const { winWidth, winHeight } = useWindowSize();
-  const [width, setWidth] = useState("60%");
+  const [width, setWidth] = useState(winWidth < 600 ? "80%" : "60%");
   const [height, setHeight] = useState("80%");
   const [cursorType, setCursorType] = useState("cursor-default");
   const [closed, setClosed] = useState(false);
   const [minim, setMinim] = useState(false);
   const [maxi, setMaxi] = useState(false);
   const [position, setPosition] = useState({
-    x: winWidth / 6,
+    x: winWidth < 600 ? winWidth / 8 : winWidth / 6,
     y: winHeight / 15,
   });
 
@@ -190,7 +169,7 @@ const Window = ({ id, screen, title, icon }) => {
           />
         </div>
 
-        <div className="overflow-hidden h-full bg-white">{screen()}</div>
+        <div className="overflow-y-auto h-full bg-white">{screen()}</div>
       </div>
     </Rnd>
   );

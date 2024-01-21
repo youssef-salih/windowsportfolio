@@ -22,6 +22,7 @@ import {
   tailwind,
 } from "../../assets/images/icons";
 import resume from "../../assets/resumeYs.pdf";
+import useWindowSize from "../../nooks/useWindow";
 const AboutYoussef = () => {
   const [screen, setScreen] = useState({
     about: <About />,
@@ -38,7 +39,7 @@ const AboutYoussef = () => {
   useEffect(() => {}, []);
 
   return (
-    <div className="flex h-full w-full">
+    <div className="flex h-full w-full ">
       {<RenderLinks changeScreen={changeScreen} activeScreen={activeScreen} />}
       <ContentWrapper>{screen[activeScreen]}</ContentWrapper>
     </div>
@@ -56,21 +57,21 @@ const RenderLinks = ({ changeScreen, activeScreen }) => {
     { nom: "resume", toScreen: "resume", icon: resumeIcon },
   ];
   return (
-    <div className="bg-white w-1/6 border-r-[1px] border-opacity-30 border-gray-500 h-full flex flex-col gap-y-2">
+    <div className="bg-white md:w-1/6 border-r-[1px] border-opacity-30 border-gray-500 h-full flex flex-col gap-y-2 ">
       <div
-        className="flex items-center  gap-x-2 cursor-pointer px-2 text-base font-medium"
+        className="flex items-center  gap-x-2 cursor-pointer px-2 text-base font-medium mr-6"
         onClick={() => setIsOpen((prev) => !prev)}
       >
         <img
           src={arrow}
           alt="arrow"
-          className={`size-3 ${
+          className={`size-3  ${
             isOpen ? "rotate-0" : "-rotate-90"
           } transition-all duration-150`}
         />
         <div className="flex  items-center gap-x-2 font-medium">
-          <img src={computer} alt="" className="size-5" />
-          <p>Ce Pc</p>
+          <img src={computer} alt="" className="md:size-5 size-4" />
+          <p className="text-sm md:text-base text-nowrap">Ce Pc</p>
         </div>
       </div>
 
@@ -78,14 +79,14 @@ const RenderLinks = ({ changeScreen, activeScreen }) => {
         links.map((link, index) => (
           <a
             key={index}
-            className={`p-1  flex gap-x-2 items-center cursor-pointer capitalize text-base font-medium ${
+            className={`p-1 w-full flex gap-x-2 items-center cursor-pointer capitalize text-nowrap text-sm md:text-base font-medium ${
               link.toScreen === activeScreen
                 ? "bg-cyan-300 bg-opacity-60 hover:bg-cyan-200"
                 : "hover:bg-cyan-300 hover:bg-opacity-10"
             } px-2`}
             onClick={() => changeScreen(link.toScreen)}
           >
-            <img src={link.icon} alt="" className="w-5" />
+            <img src={link.icon} alt="" className="md:w-5 w-3" />
             {link.nom}
           </a>
         ))}
@@ -101,13 +102,14 @@ export const displayAboutYoussef = () => {
 
 const ContentWrapper = ({ children }) => {
   return (
-    <div className="bg-white w-full h-full overflow-y-auto px-8">
+    <div className="bg-white w-full h-full overflow-x-hidden px-8 py-8">
       {children}
     </div>
   );
 };
 
 const RsLinks = () => {
+  const { winWidth, winHeight } = useWindowSize();
   const Links = [
     {
       nom: "linkedIn",
@@ -133,12 +135,14 @@ const RsLinks = () => {
             <button className="duration-500">
               <img src={link.icon} alt="" className="w-8" />
             </button>
-            <span
-              className={`absolute ${link.style}  -translate-x-[50%] z-20  scale-0 px-3 rounded-lg border border-gray-300 bg-white py-2 text-sm font-bold shadow-md transition-all duration-300 ease-in-out 
+            {winWidth > 600 && (
+              <span
+                className={`absolute ${link.style}  md:-translate-x-[50%]  z-20  scale-0 px-3 rounded-lg border border-gray-300 bg-white py-2 text-sm font-bold shadow-md transition-all duration-300 ease-in-out 
   group-hover:scale-100`}
-            >
-              <span> {link.nom}</span>
-            </span>
+              >
+                <span> {link.nom}</span>
+              </span>
+            )}
           </a>
         </div>
       ))}
@@ -228,6 +232,7 @@ const TechItem = ({ tech }) => (
       tech.color === "black" ? "bg-black" : `bg-${tech.color}-500`
     } p-1 rounded flex items-center gap-1`}
   >
+    {/* for tailwind bug  */}
     <p className="hidden bg-yellow-500 bg-rose-500 bg-black bg-pink-500 bg-orange-500 bg-blue-500 bg-violet-500 bg-cyan-500 bg-green-500"></p>
     {tech.icon && <img src={tech.icon} alt="" className="w-4 invert" />}
     <p className="text-white capitalize">{tech.nom}</p>

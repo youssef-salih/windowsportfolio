@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { wall1, wall2, wall3, wall4 } from "../../assets/images/bg";
-import {  changeBg } from "../../features/power/stateSlice";
+import { changeBg } from "../../features/power/stateSlice";
 
 const Settings = () => {
   const dispatch = useDispatch();
@@ -27,11 +27,11 @@ const Settings = () => {
   }, []);
 
   return (
-    <div>
-      <h1 className="text-center text-3xl font-bold my-5">
+    <>
+      <h1 className="text-center text-3xl font-bold my-5 ">
         Choose your wallpapers
       </h1>
-      <div className="w-full flex flex-wrap gap-4">
+      <div className="w-full flex flex-wrap gap-4 items-center justify-center">
         {wallpapers.map((wallpaper) => (
           <img
             key={wallpaper.id}
@@ -46,7 +46,7 @@ const Settings = () => {
           />
         ))}
       </div>
-    </div>
+    </>
   );
 };
 

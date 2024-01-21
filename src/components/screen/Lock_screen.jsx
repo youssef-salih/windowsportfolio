@@ -68,7 +68,7 @@ const Lock_screen = ({ unLockScreen }) => {
         <div className="mt-4 text-xl font-medium">
           <Clock onlyDay={true} />
         </div>
-        <div className=" mt-12 text-4xl font-mono font-bold">
+        <div className=" mt-12 text-2xl lg:text-4xl font-mono font-bold">
           Press any key to unlock
         </div>
       </div>

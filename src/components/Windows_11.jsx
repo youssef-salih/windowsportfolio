@@ -17,7 +17,6 @@ const Windows11 = () => {
   const dispatch = useDispatch();
 
   const [bootingScreen, setBootingScreen] = useState(true);
-  
 
   const bgImage = useSelector(bgImageValue);
 
@@ -88,16 +87,18 @@ const Windows11 = () => {
 
   useEffect(() => {
     getLocalData();
-
     return () => {};
   }, []);
 
   return (
-    <div className="w-screen h-screen overflow-hidden " id="monitor-screen">
+    <div
+      className="w-screen h-screen overflow-hidden relative"
+      id="monitor-screen"
+    >
       <Lock_screen  unLockScreen={unLockScreen} />
       <BootingScreen turnOn={turnOn} visible={bootingScreen} />
       <Navbar lockScreen={lockScreen} />
-      <Desktop  />
+      <Desktop />
     </div>
   );
 };
