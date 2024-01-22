@@ -102,14 +102,14 @@ export const displayAboutYoussef = () => {
 
 const ContentWrapper = ({ children }) => {
   return (
-    <div className="bg-white w-full h-full overflow-x-hidden px-8 py-8">
+    <div className="bg-white w-full h-full overflow-x-hidden md:px-8 px-2 py-8">
       {children}
     </div>
   );
 };
 
 const RsLinks = () => {
-  const { winWidth, winHeight } = useWindowSize();
+  const { winWidth } = useWindowSize();
   const Links = [
     {
       nom: "linkedIn",
@@ -160,8 +160,8 @@ const TitleAboutYoussef = ({ children }) => {
 
 const About = () => {
   return (
-    <div className="flex flex-col items-center  gap-y-8  min-h-0">
-      <img src={settings} alt="" className="w-1/5" />
+    <div className="flex flex-col text-center md:text-start items-center  gap-y-8  min-h-0">
+      <img src={settings} alt="" className="md:w-1/5 w-1/2" />
       <p className="font-semibold text-xl">
         my name is{" "}
         <span className="font-extrabold text-3xl">Youssef Salih</span> , <br />
@@ -170,7 +170,7 @@ const About = () => {
           Fullstack Developer
         </span>
       </p>
-      <p className="px-16 uppercase font-medium text-xl">
+      <p className="md:px-16  uppercase font-medium text-xl text-start">
         HI,I'M YOUSSEF SALIH,A Fullstack DEVELOPER LOCATED IN CASABLANCA. I HAVE
         A SERIOUS PASSION FOR UI EFFECTS, ANIMATIONS AND CREATING INTUITIVE,
         DYNAMIC USER EXPERIENCES. WELL-ORGANISED PERSON, PROBLEM SOLVER,
@@ -211,7 +211,7 @@ const Education = () => {
     <>
       <TitleAboutYoussef>Education</TitleAboutYoussef>
 
-      <ul className="list-disc px-8">
+      <ul className="list-disc md:px-8">
         {EduInfo.map((info, index) => (
           <React.Fragment key={index}>
             <li className="font-bold">{info.name}</li>
@@ -260,7 +260,7 @@ const TechsUI = () => {
   ];
 
   return (
-    <div className="flex justify-center gap-x-36 px-4">
+    <div className="flex flex-col md:flex-row justify-center gap-x-36 gap-y-8 md:px-4">
       {techs.map((category, categoryIndex) => (
         <div key={categoryIndex} className="flex flex-col items-center">
           <h1 className="">
@@ -283,7 +283,7 @@ const Skills = () => {
   return (
     <>
       <TitleAboutYoussef>Technical Skills</TitleAboutYoussef>
-      <div className="px-4 font-medium my-12">
+      <div className="md:px-4 font-medium my-12">
         <p>
           I have experience with a diverse range of programming languages and
           frameworks.
@@ -304,10 +304,10 @@ const Skills = () => {
 
 const ProjectsItem = ({ nom, tech, desc }) => {
   return (
-    <a className="group ">
-      <div className=" border-2 p-3 w-full rounded group-hover:border-black group-hover:duration-500 group-hover:transition-all group-hover:ease-in-out">
-        <h1 className="text-2xl font-medium">{nom}</h1>
-        <p className="before:block flex items-center gap-x-2 before:w-1 before:rounded before:h-1 before:bg-black my-2">
+    <a className="group">
+      <div className="my-2 border-2 p-3 w-full rounded group-hover:border-black group-hover:duration-500 group-hover:transition-all group-hover:ease-in-out">
+        <h1 className="md:text-2xl text-lg font-medium">{nom}</h1>
+        <p className="md:before:block flex items-center gap-x-2 md:before:w-1 md:before:rounded md:before:h-1 md:before:bg-black my-2">
           {desc}
         </p>
         {tech.map((techno, index) => (
@@ -325,6 +325,21 @@ const ProjectsItem = ({ nom, tech, desc }) => {
 
 const Projects = () => {
   const projects = [
+    {
+      nom: "porfolio windows theme",
+      desc: "Persolnal portrfolio website of theme windows 11 ",
+      techs: ["react", "tailwind"],
+    },
+    {
+      nom: "porfolio windows theme",
+      desc: "Persolnal portrfolio website of theme windows 11 ",
+      techs: ["react", "tailwind"],
+    },
+    {
+      nom: "porfolio windows theme",
+      desc: "Persolnal portrfolio website of theme windows 11 ",
+      techs: ["react", "tailwind"],
+    },
     {
       nom: "porfolio windows theme",
       desc: "Persolnal portrfolio website of theme windows 11 ",
