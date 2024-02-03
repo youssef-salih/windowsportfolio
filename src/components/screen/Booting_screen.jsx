@@ -22,10 +22,7 @@ function BootingScreen({ visible, turnOn }) {
         src={windowsBoot}
         alt="Ubuntu Logo"
       />
-      <div
-        className="w-10 h-10 flex justify-center items-center rounded-full outline-none cursor-pointer"
-        onClick={turnOn}
-      >
+      <div className="w-10 h-10 flex justify-center items-center rounded-full outline-none cursor-pointer">
         {shutDownScreen ? (
           <div className="bg-white rounded-full flex justify-center items-center w-10 h-10 hover:bg-gray-300">
             <img
@@ -34,6 +31,7 @@ function BootingScreen({ visible, turnOn }) {
               className="w-8 "
               src={power}
               alt="Power Button"
+              onClick={turnOn}
             />
           </div>
         ) : (
@@ -42,7 +40,7 @@ function BootingScreen({ visible, turnOn }) {
             height="40px"
             className={" w-10 " + (visible ? " animate-spin " : "")}
             src={processLoad}
-            alt="Ubuntu Process Symbol"
+            alt="windows Process Symbol"
           />
         )}
       </div>

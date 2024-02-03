@@ -23,7 +23,7 @@ const Windows11 = () => {
   const setTimeOutBootScreen = () => {
     setTimeout(() => {
       setBootingScreen(false);
-    }, 8000);
+    }, 5000);
   };
   const lockScreen = () => {
     setTimeout(() => {

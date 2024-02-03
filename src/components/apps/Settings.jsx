@@ -43,6 +43,7 @@ const Settings = () => {
                   ? "border-4 border-blue-500"
                   : ""
               }`}
+              loading="lazy"
               onClick={() => handleWallpaperClick(wallpaper.id)}
             />
           ))}
