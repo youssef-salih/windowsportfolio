@@ -27,7 +27,7 @@ const NavbarApp = ({ id, icon }) => {
       onClick={() => dispatch(openApp(id))}
       className={
         (closed_windows[id] === false ? "bg-black bg-opacity-10 " : "") +
-        " w-auto p-2 outline-none relative transition hover:bg-white hover:bg-opacity-40 rounded m-1"
+        " w-auto md:p-2 outline-none relative transition hover:bg-white hover:bg-opacity-40 rounded m-1"
       }
       id={"navbar-" + id}
     >

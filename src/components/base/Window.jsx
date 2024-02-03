@@ -7,8 +7,7 @@ import {
   maximize2,
   minimize,
 } from "../../assets/images/icons";
-import Chrome from "../apps/Chrome";
-import Spotify from "../apps/Spotify";
+
 import {
   closeApp,
   focusApp,
@@ -46,7 +45,7 @@ const WindowEdit = ({ id, checkMinimised, checkMaximized }) => {
           checkMinimised(id);
         }}
       >
-        <img src={minimize} alt="minimize" className="lg:w-4 w-5" />
+        <img src={minimize} alt="minimize" className="lg:w-4 lg:min-w-2 w-5" />
       </div>
 
       <div
@@ -56,20 +55,18 @@ const WindowEdit = ({ id, checkMinimised, checkMaximized }) => {
           checkMaximized(id);
         }}
       >
-        <img src={maximize} alt="maximize" className="lg:w-4 w-5" />
+        <img src={maximize} alt="maximize" className="lg:w-4 lg:min-w-2 w-5" />
       </div>
 
       <div
         className="hover:bg-red-500 lg:p-4  p-1 flex items-center [&>img]:hover:invert"
         onClick={() => dispatch(closeApp(id))}
       >
-        <img src={close} alt="close" className="lg:w-4 w-5" />
+        <img src={close} alt="close" className="lg:w-4 lg:min-w-2 w-5" />
       </div>
     </div>
   );
 };
-
-
 
 const Window = ({ id, screen, title, icon }) => {
   const focused_windows = useSelector(focused_windowsValue);
@@ -78,15 +75,15 @@ const Window = ({ id, screen, title, icon }) => {
   const dispatch = useDispatch();
 
   const { winWidth, winHeight } = useWindowSize();
-  const [width, setWidth] = useState(winWidth < 600 ? "80%" : "60%");
+  const [width, setWidth] = useState(winWidth < 600 ? "80%" : "75%");
   const [height, setHeight] = useState("80%");
   const [cursorType, setCursorType] = useState("cursor-default");
   const [closed, setClosed] = useState(false);
   const [minim, setMinim] = useState(false);
   const [maxi, setMaxi] = useState(false);
   const [position, setPosition] = useState({
-    x: winWidth < 600 ? winWidth / 8 : winWidth / 6,
-    y: winHeight / 15,
+    x: 50,
+    y: 50,
   });
 
   const minimized = useSelector(minimized_windowsValue);
@@ -133,6 +130,7 @@ const Window = ({ id, screen, title, icon }) => {
       position={position}
       onDragStop={handleDragStop}
       onResizeStop={(e, direction, ref, delta, position) => {
+        setPosition(position);
         setWidth(ref.style.width);
         setHeight(ref.style.height);
       }}
@@ -141,6 +139,7 @@ const Window = ({ id, screen, title, icon }) => {
       minHeight="30%"
       dragHandleClassName={`title`}
       disableDragging={maxi}
+      enableResizing={maxi ? false : true}
       className={
         "duration-75 " +
         (minim

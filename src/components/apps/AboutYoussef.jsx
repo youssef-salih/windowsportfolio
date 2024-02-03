@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useWindowSize } from "@uidotdev/usehooks";
 import {
   arrow,
   briefcase,
@@ -22,7 +23,7 @@ import {
   tailwind,
 } from "../../assets/images/icons";
 import resume from "../../assets/resumeYs.pdf";
-import useWindowSize from "../../nooks/useWindow";
+
 const AboutYoussef = () => {
   const [screen, setScreen] = useState({
     about: <About />,
@@ -109,7 +110,7 @@ const ContentWrapper = ({ children }) => {
 };
 
 const RsLinks = () => {
-  const { winWidth } = useWindowSize();
+  const { width } = useWindowSize();
   const Links = [
     {
       nom: "linkedIn",
@@ -135,7 +136,7 @@ const RsLinks = () => {
             <button className="duration-500">
               <img src={link.icon} alt="" className="w-8" />
             </button>
-            {winWidth > 600 && (
+            {width > 600 && (
               <span
                 className={`absolute ${link.style}  md:-translate-x-[50%]  z-20  scale-0 px-3 rounded-lg border border-gray-300 bg-white py-2 text-sm font-bold shadow-md transition-all duration-300 ease-in-out 
   group-hover:scale-100`}

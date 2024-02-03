@@ -29,7 +29,7 @@ const Disconect = ({ lockScreen }) => {
       <img
         src={settings}
         alt="setting"
-        className="w-8"
+        className="w-8 cursor-pointer"
         onClick={() => dispatch(openApp("settings"))}
       />
       <button onClick={lockScreen}>

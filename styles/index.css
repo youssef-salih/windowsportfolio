@@ -1,0 +1,37 @@
+/* Range Slider as a Single Thumb Slider */
+.range-slider {
+  background: #a7b1b979;
+  height: 5px;
+}
+.single-thumb .range-slider__thumb[data-lower] {
+  border: 0px solid #fff;
+  width: 0;
+}
+.single-thumb .range-slider__thumb {
+  width: 20px;
+  height: 20px;
+}
+.single-thumb .range-slider__range {
+  border-radius: 6px;
+}
+.single-thumb .range-slider__thumb[data-upper] {
+  background: #206bb6;
+}
+.single-thumb .range-slider__thumb {
+  border: 4px solid #fff;
+  box-sizing: border-box;
+}
+.single-thumb .range-slider__thumb:hover {
+  border: 3px solid #fff;
+  box-sizing: border-box;
+  transition: 0.3s all;
+}
+
+.single-thumb .range-slider__thumb:active {
+  border: 7px solid #fff;
+  box-sizing: border-box;
+  transition: 0.3s border;
+}
+.range-slider .range-slider__range {
+  background: #206bb6;
+}

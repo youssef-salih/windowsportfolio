@@ -26,7 +26,6 @@ const Windows11 = () => {
     }, 8000);
   };
   const lockScreen = () => {
-    document.getElementById("status-bar").blur();
     setTimeout(() => {
       dispatch(screenOff());
     }, 100);
@@ -95,7 +94,7 @@ const Windows11 = () => {
       className="w-screen h-screen overflow-hidden relative"
       id="monitor-screen"
     >
-      <Lock_screen  unLockScreen={unLockScreen} />
+      <Lock_screen unLockScreen={unLockScreen} />
       <BootingScreen turnOn={turnOn} visible={bootingScreen} />
       <Navbar lockScreen={lockScreen} />
       <Desktop />

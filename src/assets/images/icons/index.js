@@ -32,6 +32,13 @@ import next from "./techs/nextjs.svg";
 import node from "./techs/nodejs.svg";
 import tailwind from "./techs/tailwindcss.svg";
 import redux from "./techs/redux.svg";
+import mute from "./status/mute.svg";
+import sound from "./status/sound.svg";
+import wifi from "./status/wifi.svg";
+import brightness from "./status/brightness.svg";
+import battery from "./status/battery.svg";
+import batteryChargin from "./status/batteryChargin.svg";
+import bluetooth from "./status/bluetooth.svg";
 
 export {
   windowsBoot,
@@ -68,4 +75,11 @@ export {
   react,
   redux,
   tailwind,
+  wifi,
+  mute,
+  sound,
+  battery,
+  batteryChargin,
+  brightness,
+  bluetooth,
 };
