@@ -1,6 +1,7 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 import RangeSlider from "react-range-slider-input";
-import { useBattery } from "@uidotdev/usehooks";
+import { useBattery, useClickAway } from "@uidotdev/usehooks";
+import { useDispatch } from "react-redux";
 import Clock from "../utils_components/Clock";
 import {
   arrow,
@@ -17,18 +18,21 @@ import {
 import NavbarApp from "../base/NavbarApp";
 import apps from "../../../apps.config";
 import WindowsShowApps from "../utils_components/WindowsShowApps";
-
-import "react-range-slider-input/dist/style.css";
-import { useDispatch } from "react-redux";
 import { openApp } from "../../features/apps/appsSlice";
 
+import "react-range-slider-input/dist/style.css";
 // windows searchbar
 
 const Navbar = ({ lockScreen }) => {
   const [statusCard, setStatusCard] = useState(false);
   const [menuSettings, setMenuSettings] = useState(false);
 
-  const appsRef = useRef(null);
+  const appsRef = useClickAway(() => {
+    setStatusCard(false);
+  });
+  const settingsRef = useClickAway(() => {
+    setMenuSettings(false);
+  });
 
   let renderApps = () => {
     let sideBarAppsJsx = [];
@@ -41,33 +45,12 @@ const Navbar = ({ lockScreen }) => {
             " outline-none transition duration-100 ease-in-out border-b-2 border-transparent flex items-center "
           }
         >
-          <NavbarApp
-            id={app.id}
-            title={app.title}
-            icon={app.icon}
-            isFocus={{}}
-            isMinimized={{}}
-          />
+          <NavbarApp id={app.id} title={app.title} icon={app.icon} />
         </div>
       );
     });
     return sideBarAppsJsx;
   };
-
-  useEffect(() => {
-    // close windows menu
-    const handleOutsideClick = (event) => {
-      if (appsRef.current && !appsRef.current.contains(event.target)) {
-        setStatusCard(false);
-      }
-    };
-
-    document.addEventListener("click", handleOutsideClick);
-
-    return () => {
-      document.removeEventListener("click", handleOutsideClick);
-    };
-  }, []);
 
   return (
     <div className="ohoo absolute bottom-0 right-0 w-screen h-14 shadow-md flex flex-nowrap justify-between items-center bg-[#D6DDEF] text-sm select-none z-50 ">
@@ -89,12 +72,17 @@ const Navbar = ({ lockScreen }) => {
         className={
           "relative  text-xs md:text-sm outline-none transition duration-100 ease-in-out  flex items-center gap-x-5 mr-2"
         }
-        onClick={() => setMenuSettings((prev) => !prev)}
       >
-        <div tabIndex="0" className=" border-b-2 border-transparent group ">
-          <Status />
+        <div ref={settingsRef}>
+          <div
+            tabIndex="0"
+            className=" border-b-2 border-transparent group "
+            onClick={() => setMenuSettings((prev) => !prev)}
+          >
+            <Status />
+          </div>
+          {menuSettings && <MenuSettings />}
         </div>
-        {menuSettings && <MenuSettings />}
 
         <Clock mini />
       </div>
@@ -105,30 +93,15 @@ const Navbar = ({ lockScreen }) => {
 export default Navbar;
 
 const Status = () => {
-  const { loading, level, charging, chargingTime, dischargingTime } =
-    useBattery();
-  const width = () => {
-    return 0.1 + level * 0.88;
-  };
   return (
-    <div className="flex justify-center gap-x-2 pr-5 group-focus:bg-white group-focus:bg-opacity-40 py-3 px-5 rounded">
+    <div className="flex justify-center gap-x-2 pr-5 group-focus:bg-white group-focus:bg-opacity-30 group-hover:bg-white group-hover:bg-opacity-40 py-3 px-5 rounded">
       <img src={wifi} alt="wifi" className="w-4" />
       <img src={sound} alt="sound" className="w-4" />
-      {charging ? (
-        <img src={batteryChargin} alt="" className="w-5 " />
-      ) : (
-        <div className="relative ">
-          <div
-            className={`absolute bottom-0.5 left-0.5 -translate-y-1/2 h-2 bg-black`}
-            style={{ width: `${width()}rem` }}
-          />
-          <img src={battery} alt="" className="min-w-5 w-5  " />
-        </div>
-      )}
+      <Battery />
     </div>
   );
 };
-export function Battery() {
+export function Battery({ textLevel }) {
   const { loading, level, charging, chargingTime, dischargingTime } =
     useBattery();
   const width = () => {
@@ -137,21 +110,18 @@ export function Battery() {
 
   return (
     <>
-      <div className="flex items-center gap-x-2">
-        {charging ? (
-          <img src={batteryChargin} alt="" className="w-5 " />
-        ) : (
-          <div className="relative ">
-            <div
-              className={`absolute bottom-0.5 left-0.5 -translate-y-1/2 h-2 bg-black`}
-              style={{ width: `${width()}rem` }}
-            />
-            <img src={battery} alt="" className="w-5  " />
-          </div>
-        )}
-
-        <p className="text-lg">{parseInt(level * 100)} %</p>
-      </div>
+      {charging ? (
+        <img src={batteryChargin} alt="" className="w-5 " />
+      ) : (
+        <div className="relative ">
+          <div
+            className={`absolute bottom-0.5 left-0.5 -translate-y-1/2 h-2 bg-black`}
+            style={{ width: `${width()}rem` }}
+          />
+          <img src={battery} alt="" className="w-5 min-w-5 " />
+        </div>
+      )}
+      {textLevel && <p className="text-lg">{parseInt(level * 100)} %</p>}
     </>
   );
 }
@@ -160,26 +130,15 @@ const BottomMenu = () => {
   const dispatch = useDispatch();
   return (
     <div className="h-11 rounded-b bg-[#cdd4e8] flex items-center justify-between px-4 border-t-2 border-gray-600 border-opacity-10">
-      <Battery />
+      <div className="flex items-center gap-x-2">
+        <Battery textLevel />
+      </div>
+
       <img
         src={settings}
         alt=""
         className="w-8  p-1 cursor-pointer"
         onClick={() => dispatch(openApp("settings"))}
-      />
-    </div>
-  );
-};
-
-const SliderMenu = ({ icon, value }) => {
-  return (
-    <div className="px-5   mb-4 flex gap-x-6 items-center">
-      <img src={icon} alt="" className="w-5" />
-      <RangeSlider
-        className="single-thumb"
-        defaultValue={[0, value]}
-        thumbsDisabled={[true, false]}
-        rangeSlideDisabled={false}
       />
     </div>
   );
@@ -205,7 +164,25 @@ const SettingsButtons = ({ icon, text }) => {
   );
 };
 
+const SliderMenu = ({ icon, value, changeLevel, id }) => {
+  const dispatch = useDispatch();
+  
+  return (
+    <div className="px-5   mb-4 flex gap-x-6 items-center">
+      <img src={icon} alt="" className="w-5" />
+      <RangeSlider
+        className="single-thumb"
+        defaultValue={[0, value]}
+        thumbsDisabled={[true, false]}
+        rangeSlideDisabled={false}
+      />
+    </div>
+  );
+};
+
 const MenuSettings = () => {
+  const [volumeLevel, setvolumeLevel] = useState(50);
+  const [brightnessLevel, setbrightnessLevel] = useState(100);
   const menuSettings = [
     {
       icon: wifi,
@@ -216,20 +193,27 @@ const MenuSettings = () => {
       text: "bluetooth",
     },
   ];
+
+  const changeVolumeLevel = (e) => {
+    setvolumeLevel(e.target.value);
+  };
+
   return (
-    <div className="menu-settings-container shadow-md border-black border border-opacity-15 absolute -top-3  right-3  -translate-y-full min-h-96 w-[200%] bg-[#D6DDEF] rounded flex flex-col justify-between ">
+    <div className="shadow-md border-black border border-opacity-15 absolute -top-3  right-3  -translate-y-full min-h-96 w-[200%] bg-[#D6DDEF] rounded flex flex-col justify-between ">
       <div className=" gap-4 flex  justify-start flex-wrap  p-4">
         {menuSettings.map((set, index) => (
           <SettingsButtons key={index} icon={set.icon} text={set.text} />
         ))}
       </div>
       <div>
-        <div>
-          <SliderMenu icon={brightness} value={100} />
-        </div>
-        <div>
-          <SliderMenu icon={mute} value={70} />
-        </div>
+        <SliderMenu
+          icon={brightness}
+          value={brightnessLevel}
+          changeVolumeLevel={changeVolumeLevel}
+        />
+
+        <SliderMenu icon={mute} value={volumeLevel} />
+
         <BottomMenu />
       </div>
     </div>

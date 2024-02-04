@@ -11,23 +11,14 @@ const NavbarApp = ({ id, icon }) => {
   const closed_windows = useSelector(closed_windowsValue);
   const minimized_windows = useSelector(minimized_windowsValue);
 
-  const [scaleImage, setScaleImage] = useState(false);
-
-  const scaleImages = () => {
-    setTimeout(() => {
-      setScaleImage(false);
-    }, 1000);
-    setScaleImage(true);
-  };
-
   return (
     <div
       tabIndex="0"
       // open window
       onClick={() => dispatch(openApp(id))}
       className={
-        (closed_windows[id] === false ? "bg-black bg-opacity-10 " : "") +
-        " w-auto md:p-2 outline-none relative transition hover:bg-white hover:bg-opacity-40 rounded m-1"
+        (closed_windows[id] === false && "bg-black bg-opacity-10 ") +
+        " w-auto md:p-2 outline-none relative transition hover:bg-white hover:bg-opacity-40 rounded m-1 cursor-pointer"
       }
       id={"navbar-" + id}
     >

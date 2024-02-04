@@ -57,7 +57,7 @@ const WindowsShowApps = ({ lockScreen }) => {
       <div className="grid grid-cols-4 gap-4 px-4 mt-2">
         {filteredApps.map((app, index) => (
           <div
-            className="flex flex-col items-center"
+            className="flex flex-col items-center cursor-pointer"
             key={index}
             onClick={() => dispatch(openApp(app.id))}
           >
