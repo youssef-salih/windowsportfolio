@@ -22,7 +22,7 @@ const statusSlice = createSlice({
 
 export const { changeBrightness, changeVolume } = statusSlice.actions;
 
-export const volumeValue = (state) => state.power.volume;
-export const brightnessValue = (state) => state.power.brightness;
+export const volumeValue = (state) => state.status.volume;
+export const brightnessValue = (state) => state.status.brightness;
 
 export default statusSlice.reducer;

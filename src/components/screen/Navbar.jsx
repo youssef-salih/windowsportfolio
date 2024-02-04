@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import RangeSlider from "react-range-slider-input";
+import Slider from "react-rangeslider";
+
 import { useBattery, useClickAway } from "@uidotdev/usehooks";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Clock from "../utils_components/Clock";
 import {
   arrow,
@@ -19,8 +21,14 @@ import NavbarApp from "../base/NavbarApp";
 import apps from "../../../apps.config";
 import WindowsShowApps from "../utils_components/WindowsShowApps";
 import { openApp } from "../../features/apps/appsSlice";
-
+import "react-rangeslider/lib/index.css";
 import "react-range-slider-input/dist/style.css";
+import {
+  brightnessValue,
+  changeBrightness,
+  changeVolume,
+  volumeValue,
+} from "../../features/status/statusSlice";
 // windows searchbar
 
 const Navbar = ({ lockScreen }) => {
@@ -164,25 +172,38 @@ const SettingsButtons = ({ icon, text }) => {
   );
 };
 
-const SliderMenu = ({ icon, value, changeLevel, id }) => {
+const SliderMenu = ({ icon, value, onChange, id }) => {
   const dispatch = useDispatch();
-  
+  const [test, setTest] = useState();
+
   return (
     <div className="px-5   mb-4 flex gap-x-6 items-center">
       <img src={icon} alt="" className="w-5" />
-      <RangeSlider
+      {/* <RangeSlider
         className="single-thumb"
         defaultValue={[0, value]}
         thumbsDisabled={[true, false]}
         rangeSlideDisabled={false}
+        onChange={onChange}
+      /> */}
+      <Slider
+        min={0}
+        max={100}
+        tooltip={false}
+        value={value}
+        className=" w-full "
+        orientation="horizontal"
+        onChange={onChange}
       />
     </div>
   );
 };
 
 const MenuSettings = () => {
-  const [volumeLevel, setvolumeLevel] = useState(50);
-  const [brightnessLevel, setbrightnessLevel] = useState(100);
+  const dispatch = useDispatch();
+  const volumeVolume = useSelector(volumeValue);
+  const brightnessLevel = useSelector(brightnessValue);
+
   const menuSettings = [
     {
       icon: wifi,
@@ -193,9 +214,16 @@ const MenuSettings = () => {
       text: "bluetooth",
     },
   ];
+  const handleChangeVolumeLevel = (v) => {
+    dispatch(changeVolume(v));
+    // setVolumeLevel(v);
+    localStorage.setItem("volume-level", v);
+  };
 
-  const changeVolumeLevel = (e) => {
-    setvolumeLevel(e.target.value);
+  // Handle brightness level change
+  const handleChangeBrightnessLevel = (v) => {
+    dispatch(changeBrightness(v));
+    localStorage.setItem("brightness-level", v);
   };
 
   return (
@@ -209,10 +237,14 @@ const MenuSettings = () => {
         <SliderMenu
           icon={brightness}
           value={brightnessLevel}
-          changeVolumeLevel={changeVolumeLevel}
+          onChange={handleChangeBrightnessLevel}
         />
 
-        <SliderMenu icon={mute} value={volumeLevel} />
+        <SliderMenu
+          icon={mute}
+          value={volumeVolume}
+          onChange={handleChangeVolumeLevel}
+        />
 
         <BottomMenu />
       </div>

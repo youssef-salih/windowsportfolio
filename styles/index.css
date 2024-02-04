@@ -1,8 +1,7 @@
 /* Range Slider as a Single Thumb Slider */
-.range-slider {
+.rangeslider {
   background: #a7b1b979;
-  height: 5px;
-}
+} /* 
 .single-thumb .range-slider__thumb[data-lower] {
   border: 0px solid #fff;
   width: 0;
@@ -31,7 +30,33 @@
   border: 7px solid #fff;
   box-sizing: border-box;
   transition: 0.3s border;
-}
-.range-slider .range-slider__range {
+} */
+.rangeslider-horizontal .rangeslider__fill {
   background: #206bb6;
+}
+.rangeslider-horizontal {
+  height: 6px;
+}
+/* big thumb */
+.rangeslider-horizontal .rangeslider__handle {
+  width: 18px;
+  height: 18px;
+}
+
+.rangeslider-horizontal .rangeslider__handle::after {
+  width: 10px;
+  height: 10px;
+  left: 3px;
+  top: 3px;
+  transform-origin: center center;
+  background: #206bb6;
+  transition: 0.3s transform;
+  box-shadow: none;
+}
+.rangeslider-horizontal .rangeslider__handle:hover::after {
+  transform: scale(1.2);
+}
+.rangeslider-horizontal .rangeslider__handle:active::after {
+  transform: scale(0.6);
+  cursor: grabbing;
 }

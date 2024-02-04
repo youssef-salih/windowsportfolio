@@ -12,6 +12,7 @@ import Lock_screen from "./screen/Lock_screen";
 import BootingScreen from "./screen/Booting_screen";
 import Navbar from "./screen/Navbar";
 import Desktop from "./screen/Desktop";
+import { brightnessValue } from "../features/status/statusSlice";
 
 const Windows11 = () => {
   const dispatch = useDispatch();
@@ -19,11 +20,11 @@ const Windows11 = () => {
   const [bootingScreen, setBootingScreen] = useState(true);
 
   const bgImage = useSelector(bgImageValue);
-
+  const brightnessLevel = useSelector(brightnessValue);
   const setTimeOutBootScreen = () => {
     setTimeout(() => {
       setBootingScreen(false);
-    }, 5000);
+    }, 3000);
   };
   const lockScreen = () => {
     setTimeout(() => {
@@ -92,6 +93,9 @@ const Windows11 = () => {
   return (
     <div
       className="w-screen h-screen overflow-hidden relative"
+      style={{
+        filter: `brightness(${brightnessLevel <= 15 ? 10 : brightnessLevel}%)`,
+      }}
       id="monitor-screen"
     >
       <Lock_screen unLockScreen={unLockScreen} />
