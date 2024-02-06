@@ -5,8 +5,8 @@ const initialState = {
     "about-youssef": false,
   },
   minimized_windows: {},
-  maximized_windows: { "about-youssef": false },
-  focused_window: { spotify: false },
+  maximized_windows: {},
+  focused_window: {},
 };
 
 const appsSlice = createSlice({

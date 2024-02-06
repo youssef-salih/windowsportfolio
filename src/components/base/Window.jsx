@@ -19,13 +19,18 @@ import {
 } from "../../features/apps/appsSlice";
 import useWindowSize from "../../nooks/useWindow";
 
-const WindowTitle = ({ id, title, icon }) => {
+const WindowTitle = ({ id, title, icon, checkMaximized }) => {
+  const dispatch = useDispatch();
   return (
     <div className="flex  w-full">
       <div
         className={
           "title relative px-3 text-black w-full select-none flex gap-x-3 items-center"
         }
+        onDoubleClick={() => {
+          dispatch(maximizeApp(id));
+          checkMaximized(id);
+        }}
       >
         <img src={icon} alt={title} className="size-4" />
         <p className="font-semibold md:text-sm text-xs ">{title}</p>
@@ -34,7 +39,6 @@ const WindowTitle = ({ id, title, icon }) => {
   );
 };
 const WindowEdit = ({ id, checkMinimised, checkMaximized }) => {
-  const minimized = useSelector(minimized_windowsValue);
   const dispatch = useDispatch();
   return (
     <div className="flex gap-x-2 items- justify-between">
@@ -98,7 +102,7 @@ const Window = ({ id, screen, title, icon }) => {
   };
 
   const checkMaximized = (id) => {
-    if (maximized[id] === false) {
+    if (!maximized[id]) {
       setMaxi(true);
       setPosition({ x: 0, y: 0 });
     } else {
@@ -136,7 +140,7 @@ const Window = ({ id, screen, title, icon }) => {
       }}
       onMouseDown={handleMouseDown}
       minWidth="40%"
-      minHeight="30%"
+      minHeight="38%"
       dragHandleClassName={`title`}
       disableDragging={maxi}
       enableResizing={maxi ? false : true}
@@ -145,8 +149,8 @@ const Window = ({ id, screen, title, icon }) => {
         (minim
           ? " opacity-0 invisible -translate-y-32 "
           : "opacity-1 visible ") +
-        (maxi ? " !duration-300 " : " ") +
-        (isfoc ? `z-[49]` : `z-[30]`)
+        (isfoc ? `z-[49]` : `z-[30]`) +
+        (maxi && isfoc ? " !duration-300 z-[61]" : " ")
       }
       id={`window-${id}`}
     >
@@ -159,7 +163,12 @@ const Window = ({ id, screen, title, icon }) => {
         }
       >
         <div className="flex justify-between bg-white border-b-2 border-gray-500 border-opacity-30">
-          <WindowTitle title={title} icon={icon} id={id} />
+          <WindowTitle
+            title={title}
+            icon={icon}
+            id={id}
+            checkMaximized={checkMaximized}
+          />
           <WindowEdit
             id={id}
             maxi={maxi}

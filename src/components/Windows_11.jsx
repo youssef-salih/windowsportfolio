@@ -12,7 +12,10 @@ import Lock_screen from "./screen/Lock_screen";
 import BootingScreen from "./screen/Booting_screen";
 import Navbar from "./screen/Navbar";
 import Desktop from "./screen/Desktop";
-import { brightnessValue } from "../features/status/statusSlice";
+import {
+  brightnessValue,
+  changeBrightness,
+} from "../features/status/statusSlice";
 
 const Windows11 = () => {
   const dispatch = useDispatch();
@@ -47,7 +50,6 @@ const Windows11 = () => {
     localStorage.setItem("shut-down", false);
   };
   const shutDownAction = () => {
-    document.getElementById("status-bar").blur();
     dispatch(shutOffScreen());
     localStorage.setItem("shut-down", true);
   };
@@ -71,6 +73,10 @@ const Windows11 = () => {
       setTimeOutBootScreen();
     }
 
+    let brightnessLevel = localStorage.getItem("brightness-level");
+    if (brightnessLevel !== null && brightnessLevel !== undefined) {
+      dispatch(changeBrightness(brightnessLevel));
+    }
     // get shutdown state
     let shutDown = localStorage.getItem("shut-down");
     if (shutDown !== null && shutDown !== undefined && shutDown === "true") {

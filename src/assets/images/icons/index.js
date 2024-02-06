@@ -39,7 +39,7 @@ import brightness from "./status/brightness.svg";
 import battery from "./status/battery.svg";
 import batteryChargin from "./status/batteryChargin.svg";
 import bluetooth from "./status/bluetooth.svg";
-
+import me from "../me.svg";
 export {
   windowsBoot,
   power,
@@ -82,4 +82,5 @@ export {
   batteryChargin,
   brightness,
   bluetooth,
+  me,
 };

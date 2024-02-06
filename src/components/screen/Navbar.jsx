@@ -27,6 +27,8 @@ import {
   brightnessValue,
   changeBrightness,
   changeVolume,
+  statusValue,
+  toggle,
   volumeValue,
 } from "../../features/status/statusSlice";
 // windows searchbar
@@ -72,7 +74,12 @@ const Navbar = ({ lockScreen }) => {
         >
           <img src={windowsBoot} alt={"winboot"} className="w-12 p-2" />
         </div>
-        {statusCard && <WindowsShowApps lockScreen={lockScreen} />}
+        {statusCard && (
+          <WindowsShowApps
+            lockScreen={lockScreen}
+            setStatusCard={setStatusCard}
+          />
+        )}
         {renderApps()}
       </div>
 
@@ -153,17 +160,31 @@ const BottomMenu = () => {
 };
 
 const SettingsButtons = ({ icon, text }) => {
+  const dispatch = useDispatch();
+  const status = useSelector(statusValue);
+
   return (
     <div className="flex flex-col items-center justify-center">
-      <div className="flex items-center border border-gray-300 rounded w-fit shadow-sm bg-[#f6f6f6] active:bg-main  hover:bg-[#f6f6f6] hover:bg-opacity-75 group settings-button">
+      <div
+        className={`flex items-center border border-gray-300 rounded w-fit shadow-sm bg-[#f6f6f6] ${
+          status[text] && "bg-main"
+        }  hover:bg-[#cdcdcd] hover:bg-opacity-55  group settings-button cursor-pointer`}
+        onClick={() => dispatch(toggle(text))}
+      >
         <div className="py-3 px-4 border-r">
-          <img src={icon} alt="" className="w-4  group-active:invert" />
+          <img
+            src={icon}
+            alt=""
+            className={`w-4 ${status[text] && "invert group-hover:invert-0"}  `}
+          />
         </div>
         <div className="py-3 px-4">
           <img
             src={arrow}
             alt="arrow"
-            className="w-3 -rotate-90 group-active:invert"
+            className={`w-3 -rotate-90 ${
+              status[text] && "invert group-hover:invert-0"
+            }  `}
           />
         </div>
       </div>
@@ -179,18 +200,11 @@ const SliderMenu = ({ icon, value, onChange, id }) => {
   return (
     <div className="px-5   mb-4 flex gap-x-6 items-center">
       <img src={icon} alt="" className="w-5" />
-      {/* <RangeSlider
-        className="single-thumb"
-        defaultValue={[0, value]}
-        thumbsDisabled={[true, false]}
-        rangeSlideDisabled={false}
-        onChange={onChange}
-      /> */}
       <Slider
         min={0}
         max={100}
         tooltip={false}
-        value={value}
+        value={parseInt(value)}
         className=" w-full "
         orientation="horizontal"
         onChange={onChange}

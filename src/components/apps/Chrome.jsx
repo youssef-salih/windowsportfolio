@@ -7,6 +7,7 @@ const Chrome = () => {
   );
   const [url, setUrl] = useState("https://www.google.com/webhp?igu=1");
   const [display_url, setDisplay_url] = useState("https://www.google.com");
+  
   useEffect(() => {
     let lastVisitedUrl = localStorage.getItem("chrome-url");
     let lastDisplayedUrl = localStorage.getItem("chrome-display-url");
@@ -65,7 +66,7 @@ const Chrome = () => {
 
   const displayUrlBar = () => {
     return (
-      <div className="w-full pt-0.5 pb-1 flex justify-start items-center text-black bg-gray-500 text-sm border-b border-gray-900">
+      <div className="w-full pt-0.5 pb-1 flex justify-start items-center text-black bg-[#202124] text-sm border-b border-gray-900">
         <div
           onClick={refreshChrome}
           className=" ml-2 mr-1 flex justify-center items-center rounded-full bg-gray-50 bg-opacity-0 hover:bg-opacity-10"
@@ -80,11 +81,7 @@ const Chrome = () => {
           onClick={goToHome}
           className=" mr-2 ml-1 flex justify-center items-center rounded-full bg-gray-50 bg-opacity-0 hover:bg-opacity-10"
         >
-          <img
-            className="w-5"
-            src={chrome_home}
-            alt="Ubuntu Chrome Home"
-          />
+          <img className="w-5" src={chrome_home} alt="Ubuntu Chrome Home" />
         </div>
         <input
           onKeyDown={checkKey}

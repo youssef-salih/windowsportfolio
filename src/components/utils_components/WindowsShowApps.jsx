@@ -39,7 +39,7 @@ const Disconect = ({ lockScreen }) => {
   );
 };
 
-const WindowsShowApps = ({ lockScreen }) => {
+const WindowsShowApps = ({ lockScreen, setStatusCard }) => {
   const dispatch = useDispatch();
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -59,7 +59,10 @@ const WindowsShowApps = ({ lockScreen }) => {
           <div
             className="flex flex-col items-center cursor-pointer"
             key={index}
-            onClick={() => dispatch(openApp(app.id))}
+            onClick={() => {
+              dispatch(openApp(app.id));
+              setStatusCard(false);
+            }}
           >
             <img
               src={app.icon}

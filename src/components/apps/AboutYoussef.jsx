@@ -11,6 +11,7 @@ import {
   info,
   js,
   linkedin,
+  me,
   next,
   node,
   projectIcon,
@@ -162,7 +163,7 @@ const TitleAboutYoussef = ({ children }) => {
 const About = () => {
   return (
     <div className="flex flex-col text-center md:text-start items-center  gap-y-8  min-h-0">
-      <img src={settings} alt="" className="md:w-1/5 w-1/2" />
+      <img src={me} alt="me" className="md:w-1/5 w-1/2" />
       <p className="font-semibold text-xl">
         my name is{" "}
         <span className="font-extrabold text-3xl">Youssef Salih</span> , <br />
@@ -186,34 +187,59 @@ const About = () => {
 };
 // education
 const Education = () => {
-  const EduInfo = [
+  const eduInfo = [
     {
-      name: "master",
+      name: "master degree",
       date: "22/24",
       degree: "Software engineering and web applications",
     },
     {
       name: "Bachelor's",
       date: "21/22",
-      degree: "Development of web applications and mobile technology",
+      degree: "Development of Web Applications and Mobile Technologies",
     },
     {
-      name: "diplome",
+      name: "Diploma",
       date: "19/21",
-      degree: "pc",
-    },
-    {
-      name: "bac",
-      date: "18/19",
-      degree: "pc",
+      degree: "software development",
     },
   ];
+  const certifInfo = [
+    {
+      name: "master degree",
+      date: "22/24",
+      degree: "Software engineering and web applications",
+    },
+    {
+      name: "Bachelor's",
+      date: "21/22",
+      degree: "Development of Web Applications and Mobile Technologies",
+    },
+    {
+      name: "Diploma",
+      date: "19/21",
+      degree: "software development",
+    },
+  ];
+
   return (
     <>
       <TitleAboutYoussef>Education</TitleAboutYoussef>
 
       <ul className="list-disc md:px-8">
-        {EduInfo.map((info, index) => (
+        {eduInfo.map((info, index) => (
+          <React.Fragment key={index}>
+            <li className="font-bold">{info.name}</li>
+            <p>{info.date}</p>
+            <p className="font-medium">{info.degree}</p>
+          </React.Fragment>
+        ))}
+      </ul>
+
+      <TitleAboutYoussef>Certification</TitleAboutYoussef>
+
+      <ul className="list-disc md:px-8">
+        {certifInfo.map((info, index) => (
           <React.Fragment key={index}>
             <li className="font-bold">{info.name}</li>
             <p>{info.date}</p>
