@@ -30,6 +30,7 @@ import Spotify, { displaySpotify } from "./src/components/apps/Spotify";
 import { displayVsCode } from "./src/components/apps/Vscode";
 import { displayGedit } from "./src/components/apps/contactme";
 
+
 const apps = [
   {
     id: "chrome",
@@ -68,6 +69,24 @@ const apps = [
     desktop_shortcut: false,
     screen: displayVsCode,
   },
+  {
+    id: "settings",
+    title: "Settings",
+    icon: settings,
+    disabled: false,
+    favourite: true,
+    desktop_shortcut: false,
+    screen: displaySettings,
+  },
+  {
+    id: "gedit",
+    title: "Contact Me",
+    icon: gedit,
+    disabled: false,
+    favourite: false,
+    desktop_shortcut: true,
+    screen: displayGedit,
+  },
   // {
   //   id: "calc",
   //   title: "Calc",
@@ -87,15 +106,7 @@ const apps = [
   //   desktop_shortcut: false,
   //   // screen: displayTerminal,
   // }
-  {
-    id: "settings",
-    title: "Settings",
-    icon: settings,
-    disabled: false,
-    favourite: true,
-    desktop_shortcut: false,
-    screen: displaySettings,
-  },
+
   // {
   //   id: "trash",
   //   title: "Trash",
@@ -105,15 +116,6 @@ const apps = [
   //   desktop_shortcut: true,
   //   // screen: displayTrash,
   // },
-  {
-    id: "gedit",
-    title: "Contact Me",
-    icon: gedit,
-    disabled: false,
-    favourite: false,
-    desktop_shortcut: true,
-    screen: displayGedit,
-  },
 ];
 
 export default apps;
