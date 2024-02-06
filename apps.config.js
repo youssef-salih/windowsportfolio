@@ -28,7 +28,8 @@ import { displayChrome } from "./src/components/apps/Chrome";
 import { displaySettings } from "./src/components/apps/Settings";
 import Spotify, { displaySpotify } from "./src/components/apps/Spotify";
 import { displayVsCode } from "./src/components/apps/Vscode";
-import { displayGedit } from "./src/components/apps/contactme";
+import { displayGedit } from "./src/components/apps/ContactMe";
+
 
 
 const apps = [
