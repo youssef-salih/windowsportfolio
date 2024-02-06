@@ -1,4 +1,6 @@
-const Contactme = () => {
+import React from "react";
+
+const ContactMe = () => {
   return (
     <div className="h-full flex justify-center items-center">
       <div className="my-6">
@@ -119,8 +121,8 @@ const Contactme = () => {
   );
 };
 
-export default Contactme;
+export default ContactMe;
 
 export const displayGedit = () => {
-  return <Contactme></Contactme>;
+  return <ContactMe></ContactMe>;
 };

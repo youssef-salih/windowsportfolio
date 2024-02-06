@@ -1,13 +1,3 @@
-// import displaySpotify from './components/apps/spotify';
-// import displayVsCode from './components/apps/vscode';
-// import { displayTerminal } from './components/apps/terminal';
-// import { displaySettings } from './components/apps/settings';
-// import { displayChrome } from './components/apps/chrome';
-// import { displayTrash } from './components/apps/trash';
-// import { displayGedit } from './components/apps/gedit';
-// import { displayAboutVivek } from './components/apps/vivek';
-// import { displayTerminalCalc } from './components/apps/calc';
-
 import {
   explorer,
   folder,
@@ -28,9 +18,7 @@ import { displayChrome } from "./src/components/apps/Chrome";
 import { displaySettings } from "./src/components/apps/Settings";
 import Spotify, { displaySpotify } from "./src/components/apps/Spotify";
 import { displayVsCode } from "./src/components/apps/Vscode";
-import { displayGedit } from "./src/components/apps/ContactMe";
-
-
+import {displayGedit} from "./src/components/apps/Contact"
 
 const apps = [
   {
