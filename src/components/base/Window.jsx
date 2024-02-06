@@ -145,12 +145,12 @@ const Window = ({ id, screen, title, icon }) => {
       disableDragging={maxi}
       enableResizing={maxi ? false : true}
       className={
-        "duration-75 " +
+        "" +
         (minim
           ? " opacity-0 invisible -translate-y-32 "
           : "opacity-1 visible ") +
         (isfoc ? `z-[49]` : `z-[30]`) +
-        (maxi && isfoc ? " !duration-300 z-[61]" : " ")
+        (maxi && isfoc ? " !duration-300 z-[61]" : "")
       }
       id={`window-${id}`}
     >

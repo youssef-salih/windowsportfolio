@@ -59,7 +59,7 @@ const RenderLinks = ({ changeScreen, activeScreen }) => {
     { nom: "resume", toScreen: "resume", icon: resumeIcon },
   ];
   return (
-    <div className="bg-white md:w-1/6 border-r-[1px] border-opacity-30 border-gray-500 h-full flex flex-col gap-y-2 ">
+    <div className="bg-white md:w-1/4 border-r-[1px] border-opacity-30 border-gray-500 h-full flex flex-col gap-y-2 ">
       <div
         className="flex items-center  gap-x-2 cursor-pointer px-2 text-base font-medium mr-6"
         onClick={() => setIsOpen((prev) => !prev)}
