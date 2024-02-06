@@ -16,6 +16,8 @@ import {
   brightnessValue,
   changeBrightness,
 } from "../features/status/statusSlice";
+import { ToastContainer } from "react-toastify";
+import BackgroundImage from "./utils_components/BackgroundImages";
 
 const Windows11 = () => {
   const dispatch = useDispatch();
@@ -108,6 +110,7 @@ const Windows11 = () => {
       <BootingScreen turnOn={turnOn} visible={bootingScreen} />
       <Navbar lockScreen={lockScreen} />
       <Desktop />
+      <ToastContainer />
     </div>
   );
 };
