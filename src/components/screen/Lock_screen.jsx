@@ -11,15 +11,11 @@ import {
 const Lock_screen = ({ unLockScreen }) => {
   const screenLocked = useSelector(screenLockedValue);
   const bgImgName = useSelector(bgImageValue);
-  const wallpapers = {
-    "wall-1": wall1,
-  };
   const wallpapers1 = [
     { id: "wall-1", image: wall1 },
     { id: "wall-2", image: wall2 },
     { id: "wall-3", image: wall3 },
     { id: "wall-4", image: wall4 },
-
   ];
   const selectedWallpaper = wallpapers1.find(
     (wallpaper) => wallpaper.id === bgImgName
@@ -68,7 +64,7 @@ const Lock_screen = ({ unLockScreen }) => {
         <div className="mt-4 text-xl font-medium">
           <Clock onlyDay={true} />
         </div>
-        <div className=" mt-12 text-2xl lg:text-4xl font-mono font-bold">
+        <div className=" mt-12 text-xl lg:text-3xl font-mono font-bold">
           Press any key to unlock
         </div>
       </div>

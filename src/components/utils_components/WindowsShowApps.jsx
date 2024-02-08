@@ -69,7 +69,7 @@ const WindowsShowApps = ({ lockScreen, setStatusCard }) => {
               alt={app.id}
               className="w-16 mx-2 hover:bg-ub-gray p-2 transition-all duration-200 rounded-md"
             />
-            <p className="text-black">{app.title}</p>
+            <p className="text-black text-xs">{app.title}</p>
           </div>
         ))}
       </div>

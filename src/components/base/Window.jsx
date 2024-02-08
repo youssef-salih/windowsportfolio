@@ -33,7 +33,7 @@ const WindowTitle = ({ id, title, icon, checkMaximized }) => {
         }}
       >
         <img src={icon} alt={title} className="size-4" />
-        <p className="font-semibold md:text-sm text-xs ">{title}</p>
+        <p className="font-semibold text-xs">{title}</p>
       </div>
     </div>
   );

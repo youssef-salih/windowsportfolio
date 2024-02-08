@@ -8,7 +8,7 @@ export default {
       },
     },
     fontFamily: {
-      genos: "Genos",
+      genos: "Roboto",
     },
   },
   plugins: [],

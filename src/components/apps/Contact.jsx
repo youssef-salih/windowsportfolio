@@ -6,14 +6,18 @@ import "react-toastify/dist/ReactToastify.css";
 const ContactMe = () => {
   const [isSending, setIsSending] = useState(false);
   const form = useRef();
-
   const sendEmail = (e) => {
     setIsSending(true);
     e.preventDefault();
     emailjs
-      .sendForm("service_7t9hlmu", "template_w69sio9", form.current, {
-        publicKey: "_8zEpRt7efVrZu3kY",
-      })
+      .sendForm(
+        import.meta.env.VITE_SERVICE_ID,
+        import.meta.env.VITE_TEMPLATE_ID,
+        form.current,
+        {
+          publicKey: import.meta.env.VITE_PUBLIC_KEY,
+        }
+      )
       .then(
         () => {
           setIsSending(false);
@@ -52,7 +56,6 @@ const ContactMe = () => {
         <div className="grid  sm:grid-cols-2 items-center gap-16 p-8 mx-auto max-w-4xl bg-white shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)] rounded-md text-[#333] font-[sans-serif]">
           <div>
             <h1 className="text-3xl font-extrabold">Let's Talk</h1>
-            <p className="text-sm text-gray-400 mt-3">Aji hna yalkika</p>
             <div className="mt-12">
               <h2 className="text-lg font-extrabold">Email</h2>
               <ul className="mt-3">
@@ -102,13 +105,18 @@ const ContactMe = () => {
               className="w-full rounded-md py-2.5 px-4 border text-sm outline-[#007bff]"
               required
             />
-            <input
+            <select
+              placeholder="Subject line"
               name="subject"
-              type="text"
-              placeholder="Subject"
-              className="w-full rounded-md py-2.5 px-4 border text-sm outline-[#007bff]"
-              required
-            />
+              id="subject_input"
+              className="w-full rounded-md py-2.5 px-4 border text-sm outline-[#007bff] "
+              required=""
+            >
+              <option>I'd like to start a project</option>
+              <option>I'd like to ask a question</option>
+              <option>I'd like to make a proposal</option>
+            </select>
+
             <textarea
               name="message"
               placeholder="Message"

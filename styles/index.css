@@ -58,5 +58,4 @@
 }
 .rangeslider-horizontal .rangeslider__handle:active::after {
   transform: scale(0.6);
-  cursor: grabbing;
 }

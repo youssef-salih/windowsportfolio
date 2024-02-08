@@ -63,7 +63,7 @@ const Navbar = ({ lockScreen }) => {
   };
 
   return (
-    <div className="ohoo absolute bottom-0 right-0 w-screen h-14 shadow-md flex flex-nowrap justify-between items-center bg-[#D6DDEF] text-sm select-none z-50 ">
+    <div className=" absolute bottom-0 right-0 w-screen h-14 shadow-md flex flex-nowrap justify-between items-center bg-[#D6DDEF] text-sm select-none z-50 ">
       <div className="flex justify-center md:w-full" ref={appsRef}>
         <div
           tabIndex="0"
@@ -136,7 +136,7 @@ export function Battery({ textLevel }) {
           <img src={battery} alt="" className="w-5 min-w-5 " />
         </div>
       )}
-      {textLevel && <p className="text-lg">{parseInt(level * 100)} %</p>}
+      {textLevel && <p className="text-sm">{parseInt(level * 100)} %</p>}
     </>
   );
 }
@@ -174,7 +174,7 @@ const SettingsButtons = ({ icon, text }) => {
         <div className="py-3 px-4 border-r">
           <img
             src={icon}
-            alt=""
+            alt={text}
             className={`w-4 ${status[text] && "invert group-hover:invert-0"}  `}
           />
         </div>
@@ -188,7 +188,7 @@ const SettingsButtons = ({ icon, text }) => {
           />
         </div>
       </div>
-      <p className="text-md capitalize">{text}</p>
+      <p className="text-xs mt-1 capitalize">{text}</p>
     </div>
   );
 };

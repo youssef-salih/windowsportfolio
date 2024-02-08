@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import { useWindowSize } from "@uidotdev/usehooks";
 import {
   arrow,
@@ -24,6 +24,8 @@ import {
   tailwind,
 } from "../../assets/images/icons";
 import resume from "../../assets/resumeYs.pdf";
+import { db } from "../../../firebase";
+import { getCertifInfo, getProjects } from "../../requests";
 
 const AboutYoussef = () => {
   const [screen, setScreen] = useState({
@@ -61,7 +63,7 @@ const RenderLinks = ({ changeScreen, activeScreen }) => {
   return (
     <div className="bg-white md:w-1/4 border-r-[1px] border-opacity-30 border-gray-500 h-full flex flex-col gap-y-2 ">
       <div
-        className="flex items-center  gap-x-2 cursor-pointer px-2 text-base font-medium mr-6"
+        className="flex items-center  gap-x-2 cursor-pointer px-2  font-medium mr-6 mt-2"
         onClick={() => setIsOpen((prev) => !prev)}
       >
         <img
@@ -73,7 +75,7 @@ const RenderLinks = ({ changeScreen, activeScreen }) => {
         />
         <div className="flex  items-center gap-x-2 font-medium">
           <img src={computer} alt="" className="md:size-5 size-4" />
-          <p className="text-sm md:text-base text-nowrap">Ce Pc</p>
+          <p className="text-xs md:text-sm text-nowrap">Ce Pc</p>
         </div>
       </div>
 
@@ -81,7 +83,7 @@ const RenderLinks = ({ changeScreen, activeScreen }) => {
         links.map((link, index) => (
           <a
             key={index}
-            className={`p-1 w-full flex gap-x-2 items-center cursor-pointer capitalize text-nowrap text-sm md:text-base font-medium ${
+            className={`p-1 w-full flex gap-x-2 items-center cursor-pointer capitalize text-nowrap text-sm  font-medium ${
               link.toScreen === activeScreen
                 ? "bg-cyan-300 bg-opacity-60 hover:bg-cyan-200"
                 : "hover:bg-cyan-300 hover:bg-opacity-10"
@@ -164,15 +166,15 @@ const About = () => {
   return (
     <div className="flex flex-col text-center md:text-start items-center  gap-y-8  min-h-0">
       <img src={me} alt="me" className="md:w-1/5 w-1/2" />
-      <p className="font-semibold text-xl">
+      <p className="font-semibold text-lg">
         my name is{" "}
-        <span className="font-extrabold text-3xl">Youssef Salih</span> , <br />
+        <span className="font-extrabold text-2xl">Youssef Salih</span> , <br />
         i'm a{" "}
-        <span className="text-blue-600 font-extrabold text-3xl">
+        <span className="text-main font-extrabold text-2xl">
           Fullstack Developer
         </span>
       </p>
-      <p className="md:px-16  uppercase font-medium text-xl text-start">
+      <p className="md:px-16  uppercase font-medium text-lg text-start">
         HI,I'M YOUSSEF SALIH,A Fullstack DEVELOPER LOCATED IN CASABLANCA. I HAVE
         A SERIOUS PASSION FOR UI EFFECTS, ANIMATIONS AND CREATING INTUITIVE,
         DYNAMIC USER EXPERIENCES. WELL-ORGANISED PERSON, PROBLEM SOLVER,
@@ -187,24 +189,31 @@ const About = () => {
 };
 // education
 const Education = () => {
-  const eduInfo = [
+  const certifInfodummy = [
     {
-      name: "master degree",
-      date: "22/24",
-      degree: "Software engineering and web applications",
+      name: "Front-end Web Developement",
+      date: "2023",
+      degree: "IBM Skillsbuild",
     },
     {
-      name: "Bachelor's",
-      date: "21/22",
-      degree: "Development of Web Applications and Mobile Technologies",
+      name: "Formation SOFT-SKILLS",
+      date: "2023",
+      degree: "EFE Maroc",
     },
     {
-      name: "Diploma",
-      date: "19/21",
-      degree: "software development",
+      name: "Formation Front-end",
+      date: "2023",
+      degree: "EFE Maroc/ES2IM",
     },
   ];
-  const certifInfo = [
+  const [certifInfo, setCertifInfo] = useState(certifInfodummy);
+  useLayoutEffect(() => {
+    getCertifInfo()
+      .then((res) => setCertifInfo(res.reverse()))
+      .catch((err) => console.log(err));
+  }, []);
+
+  const eduInfo = [
     {
       name: "master degree",
       date: "22/24",
@@ -226,26 +235,27 @@ const Education = () => {
     <>
       <TitleAboutYoussef>Education</TitleAboutYoussef>
 
-      <ul className="list-disc md:px-8">
+      <ul className="list-disc md:px-8 text-xl font-medium capitalize mb-4">
         {eduInfo.map((info, index) => (
           <React.Fragment key={index}>
-            <li className="font-bold">{info.name}</li>
+            <li className="font-bold text-2xl">{info.name}</li>
             <p>{info.date}</p>
-            <p className="font-medium">{info.degree}</p>
+            <p className="font-medium text-main">{info.degree}</p>
           </React.Fragment>
         ))}
       </ul>
 
       <TitleAboutYoussef>Certification</TitleAboutYoussef>
 
-      <ul className="list-disc md:px-8">
-        {certifInfo.map((info, index) => (
-          <React.Fragment key={index}>
-            <li className="font-bold">{info.name}</li>
-            <p>{info.date}</p>
-            <p className="font-medium">{info.degree}</p>
-          </React.Fragment>
-        ))}
+      <ul className="list-disc md:px-8 text-xl font-medium capitalize">
+        {certifInfo &&
+          certifInfo.map((info, index) => (
+            <React.Fragment key={index}>
+              <li className="font-bold text-2xl">{info.name}</li>
+              <p>{info.date}</p>
+              <p className="font-medium text-main">{info.degree}</p>
+            </React.Fragment>
+          ))}
       </ul>
     </>
   );
@@ -257,12 +267,12 @@ const TechItem = ({ tech }) => (
   <div
     className={`${
       tech.color === "black" ? "bg-black" : `bg-${tech.color}-500`
-    } p-1 rounded flex items-center gap-1`}
+    } p-1 px-2 rounded flex items-center gap-1`}
   >
     {/* for tailwind bug  */}
     <p className="hidden bg-yellow-500 bg-rose-500 bg-black bg-pink-500 bg-orange-500 bg-blue-500 bg-violet-500 bg-cyan-500 bg-green-500"></p>
     {tech.icon && <img src={tech.icon} alt="" className="w-4 invert" />}
-    <p className="text-white capitalize">{tech.nom}</p>
+    <p className="text-white capitalize text-base">{tech.nom}</p>
   </div>
 );
 
@@ -310,14 +320,14 @@ const Skills = () => {
   return (
     <>
       <TitleAboutYoussef>Technical Skills</TitleAboutYoussef>
-      <div className="md:px-4 font-medium my-12">
+      <div className="md:px-4 text-xl font-medium my-12">
         <p>
           I have experience with a diverse range of programming languages and
           frameworks.
         </p>
         <p>
           I excel in front-end development, with expertise in
-          <span className="text-blue-500"> React.js and JavaScript!</span>
+          <span className="text-main"> React.js and JavaScript!</span>
         </p>
         <p>Here are my most frequenly used</p>
       </div>
@@ -333,14 +343,14 @@ const ProjectsItem = ({ nom, tech, desc }) => {
   return (
     <a className="group">
       <div className="my-2 border-2 p-3 w-full rounded group-hover:border-black group-hover:duration-500 group-hover:transition-all group-hover:ease-in-out">
-        <h1 className="md:text-2xl text-lg font-medium">{nom}</h1>
-        <p className="md:before:block flex items-center gap-x-2 md:before:w-1 md:before:rounded md:before:h-1 md:before:bg-black my-2">
+        <h1 className="md:text-2xl text-lg font-medium capitalize ">{nom}</h1>
+        <p className="md:before:block flex items-center gap-x-2 md:before:w-1 md:before:rounded md:before:h-1 md:before:bg-black my-2 text-lg ">
           {desc}
         </p>
-        {tech.map((techno, index) => (
+        {tech?.map((techno, index) => (
           <span
             key={index}
-            className="p-1 border border-black border-opacity-25 rounded-md mr-2"
+            className="p-1 border border-black border-opacity-25 rounded-md mr-2 text-base "
           >
             {techno}
           </span>
@@ -351,40 +361,29 @@ const ProjectsItem = ({ nom, tech, desc }) => {
 };
 
 const Projects = () => {
-  const projects = [
-    {
-      nom: "porfolio windows theme",
-      desc: "Persolnal portrfolio website of theme windows 11 ",
-      techs: ["react", "tailwind"],
-    },
-    {
-      nom: "porfolio windows theme",
-      desc: "Persolnal portrfolio website of theme windows 11 ",
-      techs: ["react", "tailwind"],
-    },
-    {
-      nom: "porfolio windows theme",
-      desc: "Persolnal portrfolio website of theme windows 11 ",
-      techs: ["react", "tailwind"],
-    },
-    {
-      nom: "porfolio windows theme",
-      desc: "Persolnal portrfolio website of theme windows 11 ",
-      techs: ["react", "tailwind"],
-    },
-  ];
+  const [projects, setprojects] = useState();
+  useEffect(() => {
+    getProjects().then((res) => setprojects(res));
+  }, []);
+
   return (
     <>
       <TitleAboutYoussef>Technical Projects</TitleAboutYoussef>
-      {projects.map((project, index) => (
-        <React.Fragment key={index}>
-          <ProjectsItem
-            nom={project.nom}
-            desc={project.desc}
-            tech={project.techs}
-          />
-        </React.Fragment>
-      ))}
+      {projects ? (
+        projects.map((project, index) => (
+          <React.Fragment key={index}>
+            <ProjectsItem
+              nom={project.nom}
+              desc={project.desc}
+              tech={project.techs}
+            />
+          </React.Fragment>
+        ))
+      ) : (
+        <div className="flex justify-center">
+          <div class="border-gray-300 h-12 w-12 animate-spin rounded-full border-4 border-t-blue-600" />
+        </div>
+      )}
     </>
   );
 };
