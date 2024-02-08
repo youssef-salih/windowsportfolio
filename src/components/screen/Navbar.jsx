@@ -194,12 +194,13 @@ const SettingsButtons = ({ icon, text }) => {
 };
 
 const SliderMenu = ({ icon, value, onChange, id }) => {
-  const dispatch = useDispatch();
-  const [test, setTest] = useState();
-
   return (
     <div className="px-5   mb-4 flex gap-x-6 items-center">
-      <img src={icon} alt="" className="w-5" />
+      {id && value !== 0 ? (
+        <img src={sound} alt="sound" className="w-5" />
+      ) : (
+        <img src={icon} alt="sound" className="w-5" />
+      )}
       <Slider
         min={0}
         max={100}
@@ -258,6 +259,7 @@ const MenuSettings = () => {
           icon={mute}
           value={volumeVolume}
           onChange={handleChangeVolumeLevel}
+          id
         />
 
         <BottomMenu />
