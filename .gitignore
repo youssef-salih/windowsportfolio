@@ -11,9 +11,7 @@ node_modules
 dist
 dist-ssr
 *.local
-.env
-firebase.js
-src/assets/resumeYs.pdf
+
 
 # Editor directories and files
 .vscode/*
