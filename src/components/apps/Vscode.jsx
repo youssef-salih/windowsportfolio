@@ -3,7 +3,7 @@ import React from "react";
 export default function VsCode() {
   return (
     <iframe
-      src="https://github1s.com/youssef-salih/windowsthemeportfolio/blob/main/src/components/Windows_11.jsx"
+      src="https://github1s.com/youssef-salih/windowsportfolio/blob/main/src/components/Windows_11.jsx"
       frameBorder="0"
       title="VsCode"
       className="h-full w-full bg-ub-cool-grey"
