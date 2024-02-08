@@ -12,7 +12,6 @@ dist
 dist-ssr
 *.local
 .env
-firebase.js
 *.pdf
 
 # Editor directories and files
