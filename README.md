@@ -10,7 +10,7 @@ To edit this project, clone it and make changes to the files in `/src/components
 
 Make sure you have Node.js installed on your machine. You can use either Yarn or npm.
 
-- Yarn: `yarn install`
+- Yarn: `yarn`
 - npm: `npm install`
 
 ### Running Locally
