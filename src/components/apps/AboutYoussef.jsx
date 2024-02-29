@@ -23,7 +23,7 @@ import {
   settings,
   tailwind,
 } from "../../assets/images/icons";
-import resume from "../../assets/cvYs.pdf";
+import resume from "../../assets/cvYS.pdf";
 import { db } from "../../../firebase";
 import { getCertifInfo, getProjects } from "../../requests";
 
