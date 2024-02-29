@@ -8,6 +8,7 @@ export default {
       },
     },
     fontFamily: {
+      chakra: "chakra-regular",
       genos: "Roboto",
     },
   },

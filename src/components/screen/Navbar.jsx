@@ -168,7 +168,7 @@ const SettingsButtons = ({ icon, text }) => {
       <div
         className={`flex items-center border border-gray-300 rounded w-fit shadow-sm bg-[#f6f6f6] ${
           status[text] && "bg-main"
-        }  hover:bg-[#cdcdcd] hover:bg-opacity-55  group settings-button cursor-pointer`}
+        }  lg:hover:bg-[#cdcdcd] lg:hover:bg-opacity-55  group settings-button cursor-pointer`}
         onClick={() => dispatch(toggle(text))}
       >
         <div className="py-3 px-4 border-r">
