@@ -23,7 +23,7 @@ import {
   settings,
   tailwind,
 } from "../../assets/images/icons";
-import resume from "../../assets/cvYS.pdf";
+import resume from "../../assets/dummy.pdf";
 import { db } from "../../../firebase";
 import { getCertifInfo, getProjects } from "../../requests";
 
@@ -341,7 +341,7 @@ const Skills = () => {
 
 const ProjectsItem = ({ nom, tech, desc, href }) => {
   return (
-    <a className="group" href={href} target="_blank">
+    <a className="group" href={href} target="_blank" rel="noreferrer">
       <div className="my-2 border-2 p-3 w-full rounded group-hover:border-black group-hover:duration-500 group-hover:transition-all group-hover:ease-in-out">
         <h1 className="md:text-2xl text-lg font-medium capitalize ">{nom}</h1>
         <p className="md:before:block flex items-center gap-x-2 md:before:w-1 md:before:rounded md:before:h-1 md:before:bg-black my-2 text-lg ">
